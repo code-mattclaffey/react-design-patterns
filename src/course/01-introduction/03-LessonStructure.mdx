@@ -1,0 +1,63 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta title="Introduction/03 - Lesson Structure" />
+
+# Lesson Structure
+
+As you will have already noticed in the sidebar that there is a "Lessons" section. Each lesson will get slightly more and more complex as we go on so it eases us into the course. Each lesson will also contain an "exercise.(tsx)" file and a "final.(tsx)".
+
+## Exercise files
+
+The best way to go about this course is to read through the content of the exercise and then at the end there is a challenge to complete in the exercise.tsx. In each file it will contain comments in the code which will guide you through the challenge. Each comment has an emoji which represents a certain meaning to the code, they are:
+
+- 💣 Remove - We do not need this anymore so we can get rid of it
+- 🤔 Thoughts - A question to get you thinking about that specific line of code
+- ✍🏻 Resources - some homework / resources to look into
+- 💅 Hightlight - this will be something we highlight that we have previously worked on in the course
+- 💄 Styles - Some advice on how to style the element
+- 👨🏻‍💻 Add Code - We need to do something on this line
+
+As mentioned, there will be a step by step guide through that will be broken down into numbered sections and a,b,c sub sections. For example:
+
+```jsx
+// 1a - 👨🏻‍💻 Create a component called Component that returns hello world
+const Component = () => {
+  // 1b - 👨🏻‍💻 add a useState that has false as default. Name the variable displayBox
+  const [displayBox, setDisplayBox] = useState(false);
+
+  // 2a - 🤔 How might we refactor these two functions so it would be called toggleDisplayBox();
+  // 2a - ✍🏻 Look into useReducer useReducer((bool) => !bool, false);
+  // 1c - 👨🏻‍💻 create me a showBox function which setsDisplayBox to be true
+  const showBox = () => {
+    setDisplayBox(true);
+  };
+
+  // 1d - 👨🏻‍💻 create me a hideBox function which setsDisplayBox to be false
+  const hideBox = () => {
+    setDisplayBox(false);
+  };
+
+  // 1e - 👨🏻‍💻 return a button which calls showBox or hideBox based on the value of displayBox and conditionally display a div with some text with Box as text
+  return (
+    <>
+      <button type="button" onClick={displayBox ? hideBox : showBox}>
+        Toggle Box
+      </button>
+      {/* 💅 - This is an example of the conditional rendering pattern */}
+      {displayBox && (
+        // 💣 - Do we need a div here?
+        <div>
+          {/* 💄 - add text-blue as a className */}
+          <p>Box</p>
+        </div>
+      )}
+    </>
+  );
+};
+```
+
+## Final files
+
+If you get stuck do not worry! Each lesson.mdx file will have a video going through it all and there will be a final.tsx file showing the final solution of each exercise.
+
+[Let's get started](?path=/docs/lessons-01-conditional-rendering-pattern-01-lesson--docs)
