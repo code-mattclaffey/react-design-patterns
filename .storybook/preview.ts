@@ -1,12 +1,14 @@
 import type { Preview } from '@storybook/react';
-import { withThemeByDataAttribute } from '@storybook/addon-themes';
-import { themes } from '@storybook/theming';
+import { Code } from './components/CodeBlock';
 import 'tailwindcss/tailwind.css';
+import './styles/docs.styles.css';
 
 const preview: Preview = {
   parameters: {
     docs: {
-      theme: themes.dark
+      components: {
+        code: Code
+      }
     },
     storySort: ['Introduction', 'Lessons', 'Recipes'],
     controls: {
@@ -17,16 +19,5 @@ const preview: Preview = {
     }
   }
 };
-
-export const decorators = [
-  withThemeByDataAttribute({
-    themes: {
-      light: 'light',
-      dark: 'dark',
-    },
-    defaultTheme: 'light',
-    attributeName: 'data-mode',
-  }),
-];
 
 export default preview;
