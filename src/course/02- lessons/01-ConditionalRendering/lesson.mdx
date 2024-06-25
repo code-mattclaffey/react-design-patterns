@@ -32,11 +32,7 @@ const Component = (props) => {
 };
 ```
 
-> Can you spot the problem with using the AND operator?
-
-## Conditionally rendering components
-
-With react components, you can just return null and the component would not render. However, if you have the control over the rendering of that component, it's best practice to conditionally render the component as a whole. For example:
+If I had a lot of complexity in this component that still would be getting excecuted but the component will just return nothing if it's not authenticated. The best way to return something like this is to do the conditional render outside of the Component, for example:
 
 ```jsx
 const ComponentOne = (props) => {
