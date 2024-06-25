@@ -1,54 +1,18 @@
 import { addons } from '@storybook/manager-api';
-import { ThemeVarsPartial } from '@storybook/theming';
 import { create } from '@storybook/theming/create';
 
-const baseThemeStyles: Partial<ThemeVarsPartial> = {
+const theme = create({
+  base: 'dark',
+
   // Typography
-  fontBase: '"Open Sans", sans-serif',
+  fontBase: '"Poppins", "Open Sans", sans-serif',
   fontCode: 'monospace',
 
   brandTitle: '⚛️ React Design Patterns',
   brandUrl: 'https://example.com',
   brandTarget: '_self',
   //
-  colorPrimary: '#3A10E5',
-  colorSecondary: '#585C6D',
-
-  // UI
-  appBg: '#ffffff',
-  appContentBg: '#ffffff',
-  appPreviewBg: '#ffffff',
-  appBorderColor: '#585C6D',
-  appBorderRadius: 4,
-
-  // Text colors
-  textColor: '#10162F',
-  textInverseColor: '#ffffff',
-
-  // Toolbar default and active colors
-  barTextColor: '#9E9E9E',
-  barSelectedColor: '#585C6D',
-  barHoverColor: '#585C6D',
-  barBg: '#ffffff',
-
-  // Form colors
-  inputBg: '#ffffff',
-  inputBorder: '#10162F',
-  inputTextColor: '#10162F',
-  inputBorderRadius: 2
-};
-
-const lightTheme = create({
-  base: 'light',
-  ...baseThemeStyles
-});
-
-const darkTheme = create({
-  base: 'dark',
-  ...baseThemeStyles,
-
-  //
-  colorPrimary: '#1E1E3F',
+  colorPrimary: '#ffffff',
   colorSecondary: '#A599E9',
 
   // UI
@@ -81,9 +45,7 @@ const darkTheme = create({
 });
 
 const themes = {
-  light: lightTheme,
-  dark: darkTheme,
-  normal: lightTheme
+  dark: theme
 };
 
 addons.setConfig({
