@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Final } from './final';
+import { Exercise } from './exercise';
 
-const meta: Meta<typeof Final> = {
-  title: 'Lessons/03 - Render Props Pattern/03-Final',
-  component: Final
+const meta: Meta<typeof Exercise> = {
+  title: 'Lessons/11 - Slots 🚧/02-Exercise',
+  component: Exercise
 };
 
 export default meta;
-type Story = StoryObj<typeof Final>;
+type Story = StoryObj<typeof Exercise>;
 
 /*
  * See https://storybook.js.org/docs/writing-stories/play-function#working-with-the-canvas

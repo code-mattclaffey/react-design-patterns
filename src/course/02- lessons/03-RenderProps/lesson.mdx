@@ -1,5 +1,35 @@
 import { Meta } from '@storybook/blocks';
 
-<Meta title="Lessons/03 - Render Props Pattern 🚧/01-Lesson" />
+<Meta title="Lessons/03 - Render Props Pattern/01-Lesson" />
 
-# Render Props Pattern 🚧
+# Render Props Pattern
+
+Render props is a common pattern you will see in popular NPM packages like [Formik](https://formik.org/) or [React Final form](https://final-form.org/react) and it is very useful for building components that manage the logic but passes information to it's children/prop so they can use that logic in the UI layer.
+
+## With children
+
+```jsx
+const HelloWorld = ({ children }) => children({ hello: 'world' });
+
+// How you would use it.
+<HelloWorld>{({ hello }) => <p>{hello}</p>}</HelloWorld>;
+```
+
+## With props
+
+```jsx
+const HelloWorld = ({ render }) => render({ hello: 'world' });
+
+// How you would use it.
+<HelloWorld render={({ hello }) => <p>{hello}</p>} />;
+```
+
+## Exercise
+
+In this exercise we are going to create a simplfied version of the Field component which is commonly used within the libraries specified above. What we have in the code is a component which mixes three UI components (Label, TextField, ErrorMessage) with app logic which is tightly coupled together.
+
+The task: We have multiple teams that want to use that visual element for their applications but they do not align with the app logic as their apps behave differently. They all want the ability to use the UI logic alone so they can handle the app logic their way.
+
+Our task is to refactor the UI out of the Field component and then pass props into the UI component using the render props pattern.
+
+Head over to the exercise file and let's begin.
