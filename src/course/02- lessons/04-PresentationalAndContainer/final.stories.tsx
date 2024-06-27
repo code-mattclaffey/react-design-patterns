@@ -1,21 +1,23 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Final } from './final';
+import { BrandPageOne, BrandPageTwo } from './final';
 
-const meta: Meta<typeof Final> = {
-  title: 'Lessons/04 - Presentational & Container Pattern 🚧/03-Final',
-  component: Final
+const meta: Meta<typeof BrandPageOne> = {
+  title: 'Lessons/04 - Presentational & Container Pattern/03-Final',
+  component: BrandPageOne
 };
 
 export default meta;
-type Story = StoryObj<typeof Final>;
+type Story = StoryObj<typeof BrandPageOne>;
 
-
-/*
- * See https://storybook.js.org/docs/writing-stories/play-function#working-with-the-canvas
- * to learn more about using the canvasElement to query the DOM
- */
-export const Default: Story = {
+export const PageOne: Story = {
   play: async () => {},
-  args: {}
+  args: {},
+  render: () => <BrandPageOne />
+};
+
+export const PageTwo: Story = {
+  play: async () => {},
+  args: {},
+  render: () => <BrandPageTwo />
 };

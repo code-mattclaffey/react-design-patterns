@@ -1,5 +1,176 @@
 import { Meta } from '@storybook/blocks';
 
-<Meta title="Lessons/04 - Presentational & Container Pattern 🚧/01-Lesson" />
+<Meta title="Lessons/04 - Presentational & Container Pattern/01-Lesson" />
 
-# Presentational & Container Pattern 🚧
+# Presentational & Container Pattern
+
+This is an old pattern created by Dan Abramov. However, he doesn't suggest to use this pattern anymore as it was more linked to before reack hooks. This pattern has become more obsolete since hooks came into the mix.
+
+The main purpose of this pattern is to decouple the complex state logic and seperation of concerns between components in the app.
+
+## Where could you use this pattern still?
+
+[Atomic design](https://bradfrost.com/blog/post/atomic-web-design/) is a very common pattern used when building up UI components. However, when you get to the template / page level it's common that these get blurred together and the design principles of Atomic Design get faded.
+
+If you wish to use this pattern with the Atomic Design principles, you can use the **page** as a container and the **template** as the UI. For example:
+
+### Before
+
+```jsx
+const Page = () => {
+  // Imaginary npm package that copies RTK pattern.
+  const [addToBasketApi] = useAddToBasketApi();
+  const [getBasketItems, { refetch, data: basketItems }] = useGetBasketItems();
+  const [getProducts, { isLoading, isError, data }] = useApiQuery();
+
+  useEffect(() => {
+    getProducts();
+  }, []);
+
+  const onProductClick = (productId) => {
+    addToBasketApi(productId);
+    refetch();
+  };
+
+  if (isLoading) {
+    return (
+      <div className="loading-component">
+        {/* Skeleton UI for this template */}
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className="error-component">
+        {/* Skeleton UI for this template */}
+      </div>
+    );
+  }
+
+  return (
+    <main className="main-template">
+      <h1>Title</h1>
+      <p>Text</p>
+
+      {data.products.map((product) => (
+        <article key={product.id}>
+          <h2>{product.name}</h2>
+          <button
+            type="button"
+            onClick={() => onProductClick(product.id)}
+          >
+            Add Product
+          </button>
+        </article>
+      ))}
+
+      <aside>
+        <ul>
+          {basketItems.items.map(basketItem => (
+            <li key={basketItem.id}>{basketItem.name}</li>
+          ))}
+        </li>
+      </aside>
+    </main>
+  );
+};
+```
+
+This is purely a high level example but if you imagine this being a page where you can add products and view your basket, it can easily get massive and complex.
+
+## After
+
+```jsx
+const Template = ({
+  products,
+  isLoading,
+  isError,
+  basket,
+  title,
+  text,
+  onProductClick
+}) => {
+
+  if (isLoading) {
+    return (
+      <div className="loading-component">
+        {/* Skeleton UI for this template */}
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className="error-component">
+        {/* Skeleton UI for this template */}
+      </div>
+    );
+  }
+
+  return (
+    <main className="main-template">
+      <h1>{title}</h1>
+      <p>{text}</p>
+
+      {products.map((product) => (
+        <article key={product.id}>
+          <h2>{product.name}</h2>
+          <button
+            type="button"
+            onClick={() => onProductClick(product.id)}
+          >
+            Add Product
+          </button>
+        </article>
+      ))}
+
+      <aside>
+        <ul>
+          {basket.items.map(basketItem => (
+            <li key={basketItem.id}>{basketItem.name}</li>
+          ))}
+        </li>
+      </aside>
+    </main>
+  );
+}
+
+const Page = () => {
+  // Imaginary npm package that copies RTK pattern.
+  const [addToBasketApi] = useAddToBasketApi();
+  const [getBasketItems, { refetch, data: basketItems }] = useGetBasketItems();
+  const [getProducts, { isLoading, isError, data }] = useApiQuery();
+
+  useEffect(() => {
+    getProducts();
+  }, []);
+
+  const onProductClick = (productId) => {
+    addToBasketApi(productId);
+    refetch();
+  };
+
+  return (
+    <Template
+      products={data.products}
+      basket={basketItems}
+      onProductClick={onProductClick}
+      isLoading={isLoading}
+      isError={isError}
+      title="Title"
+      text="Text"
+    />
+  );
+};
+```
+
+By doing this you have decoupled the logic in the application away from the UI layer. This makes it easier to test and it makes it more flexible incase that template is used elsewhere.
+
+## Exercise
+
+In this exercise we are going to practice decoupling the template from the page but the trick here is to understand what should live in the template and what should live on the page level.
+
+The task: You are working an a mono repo which is a [white label website](https://webwave.me/what-is-white-label#:~:text=A%20white%2Dlabel%20website%20is,brand%20them%20as%20their%20own.). The client has asked the team if the Payment page can be reused for another brand they own but the apis need to be hitting a different source as that brand has a contract with a different payment provider. Our task is to make the UI reusable for both brands but the application logic needs to work differently for those brand pages.
+
+Head over to the exercise and let's begin.

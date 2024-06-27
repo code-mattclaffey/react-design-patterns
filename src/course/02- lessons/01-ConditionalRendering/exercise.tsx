@@ -1,8 +1,8 @@
+import { Button } from '../../../shared/components/Button/Button.component';
+
 interface IComponentProps {
   username: string;
 }
-
-const buttonClasses = 'middle none center rounded-lg bg-blue-500 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none';
 
 // 1g - 💣 The ignore lint rules can be removed now
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -19,5 +19,5 @@ export const ComponentOne = (props: IComponentProps) => {
   // 1e - 👨🏻‍💻 if authenticated, return some text called "Welcome {props.username}"
 
   // 1f - 👨🏻‍💻 add onClick function onLogin to the button
-  return <button type="button" className={buttonClasses}>Login</button>;
+  return <Button>Login</Button>;
 };
