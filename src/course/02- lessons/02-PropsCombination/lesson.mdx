@@ -30,7 +30,7 @@ const CardComponent = ({
 
 Yes... this is pretty wild but it's very common to see this in the real world. What we have going into this component is:
 
-- image - the image sources, alt text
+- image - the image sources, imageAltText
 - cta - text and ctaUrl
 - content - title, sub title
 - classNames - all classNames
@@ -38,7 +38,7 @@ Yes... this is pretty wild but it's very common to see this in the real world. W
 Now look at this when it is grouped:
 
 ```jsx
-const CardComponent = ({ title, subText, cta, image, mobile }) => (
+const CardComponent = ({ title, subText, cta, image }) => (
   <article>{/* Lots of imaginary code here... */}</article>
 );
 ```
