@@ -20,7 +20,11 @@ There are many syntactical ways you can do the same as above such as the ternary
 
 ```jsx
 const Component = (props) => {
-  return props.isAuthenticated ? <h1>Welcome {props.username}!</h1> : <h1>Not logged in.</h1>;
+  return props.isAuthenticated ? (
+    <h1>Welcome {props.username}!</h1>
+  ) : (
+    <h1>Not logged in.</h1>
+  );
 };
 ```
 
@@ -83,3 +87,9 @@ const Component = () => {
 ## Exercise
 
 In the first excercise we are going to look into building a login and logout toggle which will render a username when they have logged in. Go to the exercise.tsx inside 01-ConditionalRendering folder and start the exercise. Once completed, the Tests will show as passed in the storybook "Interactions" addon section.
+
+## Feedback
+
+Feedback is a gift and it helps me make these course better for you. If you have a spare 5 mins please could you fill out a feedback form for me. Thank you.
+
+[Feedback](https://forms.gle/r28k2wchCLBfpvX27)
