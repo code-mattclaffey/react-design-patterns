@@ -19,6 +19,7 @@ interface IPaymentTemplate {
 // 1A 👨🏻‍💻 - Migrate the JSX from BrandPage One into the PaymentTemplate.
 // 🤔 Think about where that local state should live. It's not business logic so copy over the
 // showBillingAddress functionality as well.
+// @ts-ignore
 const PaymentTemplate = ({}: IPaymentTemplate) => null;
 
 // 1B 👨🏻‍💻 - Use the Payment template and pass down the props it needs
