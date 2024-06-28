@@ -20,7 +20,15 @@ const App = () => {
           Get started
         </a>
         <p className="text-sm mt-8">
-          Made with ❤️ by Matt Claffey @code-mattclaffey
+          Made with ❤️ by Matt Claffey{' '}
+          <a
+            href="https://github.com/code-mattclaffey"
+            target="_blank"
+            rel="noreferrer"
+            className="underline-offset-1 underline font-semibold"
+          >
+            @code-mattclaffey
+          </a>
         </p>
       </main>
       <Analytics />
