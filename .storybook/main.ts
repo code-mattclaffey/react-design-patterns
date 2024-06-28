@@ -1,4 +1,5 @@
 import type { StorybookConfig } from '@storybook/react-vite';
+import { mergeConfig } from 'vite';
 
 const config: StorybookConfig = {
   stories: [
@@ -15,6 +16,19 @@ const config: StorybookConfig = {
     name: '@storybook/react-vite',
     options: {}
   },
-  staticDirs: ['../public']
+  staticDirs: ['../public'],
+  managerHead: (head, { configType }) => {
+    if (configType === 'PRODUCTION') {
+      return `
+        ${head}
+        <base href="/storybook/">
+      `;
+    }
+  },
+  async viteFinal(baseConfig, { configType }) {
+    return mergeConfig(baseConfig, {
+      ...(configType === 'PRODUCTION' ? { base: '/storybook/' } : {})
+    });
+  }
 };
 export default config;
