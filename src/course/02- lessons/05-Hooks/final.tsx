@@ -1,16 +1,5 @@
-import { ChangeEvent, HTMLAttributes, useState } from 'react';
-import { Input } from '../../../shared/components/Input/Input.component';
-import { Label } from '../../../shared/components/Label/Label.component';
-import { ErrorMessage } from '../../../shared/components/ErrorMessage/ErrorMessage.component';
-
-interface ITextFieldProps {
-  hasError: boolean;
-  errorMessage?: string;
-  id: string;
-  name: string;
-  label: string;
-  input: HTMLAttributes<HTMLInputElement> & { required?: boolean };
-}
+import { ChangeEvent, useState } from 'react';
+import { TextFieldComponent } from './components';
 
 interface IFieldProps {
   name: string;
@@ -20,23 +9,6 @@ interface IFieldProps {
 
 const validateTextString = (value: string) =>
   value.trim().length === 0;
-
-const TextFieldComponent = ({
-  hasError,
-  errorMessage,
-  input,
-  id,
-  name,
-  label
-}: ITextFieldProps) => (
-  <div className="flex flex-col gap-2">
-    <Label htmlFor={id}>{label}</Label>
-    <Input id={id} name={name} hasError={hasError} {...input} />
-    {errorMessage && hasError && (
-      <ErrorMessage message={errorMessage} />
-    )}
-  </div>
-);
 
 export const useField = ({
   name,

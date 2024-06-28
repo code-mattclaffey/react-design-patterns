@@ -1,9 +1,27 @@
 import { useEffect, useState } from 'react';
 import { ErrorMessage } from '../../../shared/components/ErrorMessage/ErrorMessage.component';
-import { useBrandOnePayment, useCheckout } from './mocks';
+import {
+  ICheckoutData,
+  useBrandOnePayment,
+  useCheckout
+} from './mocks';
 import { Skeleton } from '../../../shared/components/Skeleton/Skeleton.component';
 import { Button } from '../../../shared/components/Button/Button.component';
 
+interface IPaymentTemplate {
+  hasPaymentFailed: boolean;
+  checkoutData?: ICheckoutData;
+  onMakePaymentClick: () => void;
+  isLoading: boolean;
+  onBillingAddressUpdate: () => void;
+}
+
+// 1A 👨🏻‍💻 - Migrate the JSX from BrandPage One into the PaymentTemplate.
+// 🤔 Think about where that local state should live. It's not business logic so copy over the
+// showBillingAddress functionality as well.
+const PaymentTemplate = ({}: IPaymentTemplate) => null;
+
+// 1B 👨🏻‍💻 - Use the Payment template and pass down the props it needs
 export const BrandPageOne = () => {
   const [
     getCheckoutInfo,
@@ -106,6 +124,9 @@ export const BrandPageOne = () => {
   );
 };
 
+// 1C 👨🏻‍💻 - Copy the BrandPageOne component but change useBrandOnePayment to be
+// useBrandTwoPayment which lives in mocks.ts
+// 1D 👨🏻‍💻 - in the useEffect that has the console log, change the text to "brand two"
 export const BrandPageTwo = () => {
   return null;
 };

@@ -1,54 +1,36 @@
-import { ChangeEvent, HTMLAttributes, useState } from 'react';
-import { Input } from '../../../shared/components/Input/Input.component';
-import { Label } from '../../../shared/components/Label/Label.component';
-import { ErrorMessage } from '../../../shared/components/ErrorMessage/ErrorMessage.component';
+import { ChangeEvent, useState } from 'react';
+import { ITextFieldProps, TextFieldComponent } from './components';
 
-interface ITextFieldProps {
-  hasError: boolean;
-  errorMessage?: string;
-  id: string;
-  name: string;
-  label: string;
-  input: HTMLAttributes<HTMLInputElement> & { required?: boolean };
-}
+/*
+ * Observations
+ * 💅 The current implementation uses the Render Props Pattern
+ * Don't worry about the UI in the components file.
+ */
 
 interface IFieldProps {
   name: string;
+  validate?: (value: string) => boolean;
+  required?: boolean;
+
+  // 1B 💣 - remove these four params and references in the function.
   id: string;
   label: string;
-  required?: boolean;
   errorMessage?: string;
-  validate?: (value: string) => boolean;
   children: (props: ITextFieldProps) => React.ReactNode;
 }
 
 const validateTextString = (value: string) =>
   value.trim().length === 0;
 
-const TextFieldComponent = ({
-  hasError,
-  errorMessage,
-  input,
-  id,
-  name,
-  label
-}: ITextFieldProps) => (
-  <div className="flex flex-col gap-2">
-    <Label htmlFor={id}>{label}</Label>
-    <Input id={id} name={name} hasError={hasError} {...input} />
-    {errorMessage && hasError && (
-      <ErrorMessage message={errorMessage} />
-    )}
-  </div>
-);
-
+// 1A 👨🏻‍💻 - We need to refactor this to be called useField
 export const Field = ({
   name,
+  required,
+  validate,
+  // 1B 💣 - remove these four params and references in the function.
   label,
   id,
-  required,
   errorMessage,
-  validate,
   children
 }: IFieldProps) => {
   const [value, setValue] = useState('');
@@ -77,24 +59,33 @@ export const Field = ({
     }
   };
 
+  // 1C 👨🏻‍💻 - Just return the object instead of children.
   return children({
+    // 1D 👨🏻‍💻 - move name into input
     name,
-    label,
-    id,
-    errorMessage,
-    hasError,
     input: {
       required,
       onBlur,
       onFocus,
       onChange
-    }
+    },
+    hasError,
+    // 1B 💣 - remove these three params and references in the function.
+    label,
+    id,
+    errorMessage
   });
 };
 
+// 2A 🤔 - What if we wanted to make multiple Fields? Our current solution would
+// require us to call useField multiple times in the same component. Let's refactor
+// what we have done into a field component which uses IFieldProps as params.
+
 export const Exercise = () => {
+  // 1E 👨🏻‍💻 - call the useField and pass the { name: "input", validate: validateTextString, required: true }
   return (
     <form noValidate name="form">
+      {/* 1F 💣 - Remove the Field component and pull the values required for TextFieldComponent to run */}
       <Field
         name="input"
         id="input"
@@ -105,6 +96,7 @@ export const Exercise = () => {
       >
         {({ name, label, id, errorMessage, hasError, input }) => (
           <TextFieldComponent
+            // input.name it will be now.
             name={name}
             label={label}
             id={id}
