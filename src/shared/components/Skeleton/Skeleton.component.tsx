@@ -9,7 +9,7 @@ interface ISkeleton {
 export const Skeleton = ({ width, height, className }: ISkeleton) => (
   <div
     className={classNames(
-      'block mb-2 animate-pulse bg-gray-200',
+      'block mb-2 animate-pulse bg-gray-200 rounded-lg',
       height,
       width,
       className
