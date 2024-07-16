@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import { useEffect, useRef, useState } from 'react';
 import FocusLock from 'react-focus-lock';
+import { Button } from '../../../shared/components/Button/Button.component';
 
 interface IModal {
   isVisible: boolean;
@@ -55,13 +56,7 @@ const Modal = ({
         <FocusLock>
           <div>
             <h2 id={`modal_title_${id}`}>{title}</h2>
-            <button
-              type="button"
-              aria-label="Close dialog"
-              onClick={onClose}
-            >
-              {/* Close SVG */}
-            </button>
+            <Button onClick={onClose}>Close Dialog</Button>
           </div>
           <div id={`modal_body_${id}`}>{children}</div>
         </FocusLock>
@@ -71,15 +66,10 @@ const Modal = ({
 };
 
 export const Final = () => {
-  const button = useRef<HTMLButtonElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
   const onClose = () => {
     setIsVisible(false);
-
-    if (button.current) {
-      button.current.focus();
-    }
   };
 
   const onOpen = () => {
@@ -88,17 +78,19 @@ export const Final = () => {
 
   return (
     <>
-      <button type="button" ref={button} onClick={onOpen}>
+      <button type="button" onClick={onOpen}>
         Open Modal
       </button>
-      <Modal
-        id="modal"
-        onClose={onClose}
-        isVisible={isVisible}
-        title="Modal"
-      >
-        <p>Hello this is a modal</p>
-      </Modal>
+      {isVisible && (
+        <Modal
+          id="modal"
+          onClose={onClose}
+          isVisible={isVisible}
+          title="Modal"
+        >
+          <p>Hello this is a modal</p>
+        </Modal>
+      )}
     </>
   );
 };
