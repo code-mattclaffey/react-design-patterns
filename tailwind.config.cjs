@@ -5,6 +5,9 @@ export default {
   theme: {
     extend: {
       colors: {
+        modal: {
+          bg: 'rgba(0, 0, 0, 0.3)'
+        },
         code: {
           950: '#1E1E3F',
           750: '#2D2B55',
