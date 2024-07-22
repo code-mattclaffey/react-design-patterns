@@ -38,10 +38,10 @@ const Modal = ({
   // 💣 You can get rid of this eslint error comment when finished.
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const onModalPress = (event: React.MouseEvent) => {
-    // You may have noticed how we have add an onClose event to the container
-    // And that is because customers normally click out of the modal to leave
-    // But if they click within the modal happens. The event "bubbles" up to
-    // The container div and it closes the modal. Which is janky behaviour
+    // You may have noticed how we have added an onClose event to the container
+    // and that is because customers normally click out of the modal to leave,
+    // but if they click within the modal happens. The event "bubbles" up to
+    // the container div and it closes the modal. Which is janky behaviour
     // 🧪 When you finish, remove the onModal press from the modal and try to click inside the modal then add it back
     // ✍🏻 Stop propagation prevents an event from bubbling to the top.
     // ✍🏻 https://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation
@@ -72,7 +72,7 @@ const Modal = ({
         // * onClick={onModalPress} - description in onModalPress.
         className="bg-white rounded-2xl p-5 relative z-20"
       >
-        {/* ✍🏻 SUPER important for meeting the WCAG quidelines is that you need focus to but locked within this div */}
+        {/* ✍🏻 SUPER important for meeting the WCAG quidelines is that you need focus, but locked within this div */}
         {/* When focus is landed in this box with a keyboard you can no longer get out so make sure you have a close button */}
         {/* ♿️ Another requirement is to return focus to the actioner, but FocusLock does that for us when this component unmounts! 🦸🏻‍♀️ */}
         <FocusLock>
@@ -93,16 +93,16 @@ const Modal = ({
 export const Exercise = () => {
   // 1a 👨🏻‍💻 Create a state hook variable with isVisible and setIsVisible
 
-  // 1b 👨🏻‍💻 Create an onClose event that setIsVisible to false
+  // 1b 👨🏻‍💻 Create an onClose event that sets isVisible to false
 
-  // 1c 👨🏻‍💻 Create an onOpen event that setIsVisible to true
+  // 1c 👨🏻‍💻 Create an onOpen event that sets isVisible to true
 
   return (
     <>
-      {/* 1d 👨🏻‍💻 Add the onClick={onOpen} event to the button */}
-      {/* ✍🏻 This is an example of a Controlled component but in a HTML context */}
-      {/* As a developer, we are providing the button with those props for the button */}
-      {/* To behave how we want it to behave, otherwise, it does nothing. */}
+      {/* 1d 👨🏻‍💻 Add the onClick={onOpen} event to the button 
+      ✍🏻 This is an example of a Controlled component but in a HTML context.
+      As a developer, we are providing the button with those props for the button
+      to behave how we want it to behave, otherwise, it does nothing. */}
       <button type="button">Open Modal</button>
       {/* 1e 👨🏻‍💻 Check if isVisible (💅 Conditional Render Pattern) to render the Modal */}
       {/* Map the isVisible and onClose props to the Modal. The other props can be whatever you want */}

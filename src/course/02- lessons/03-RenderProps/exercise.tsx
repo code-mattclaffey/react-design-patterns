@@ -17,7 +17,7 @@ export interface ITextInputFieldProps {
   * The UI is already split into small components
 
   * Tasks
-  * 1A 👨🏻‍💻 - Refactor the UI layer into it's own component and setup the interface for it's types to be:
+  * 1A 👨🏻‍💻 - Refactor the UI layer into its own component and setup the interface for its types to be:
   * hasError: boolean;
   * errorMessage?: string;
   * id: string;
