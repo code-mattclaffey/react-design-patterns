@@ -96,7 +96,7 @@ export const Exercise = () => {
       >
         {({ name, label, id, errorMessage, hasError, input }) => (
           <TextFieldComponent
-            // input.name it will be now.
+            // This will be input.name now.
             name={name}
             label={label}
             id={id}
