@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Exercise } from './exercise';
 
 const meta: Meta<typeof Exercise> = {
-  title: 'Lessons/07 - Higher Order Components Pattern/02-Exercise',
+  title: 'Lessons/12 - Portals 🚧/02-Exercise',
   component: Exercise
 };
 
@@ -16,7 +16,5 @@ type Story = StoryObj<typeof Exercise>;
  */
 export const Default: Story = {
   play: async () => {},
-  args: {
-    title: 'Pokemon Cards'
-  }
+  args: {}
 };

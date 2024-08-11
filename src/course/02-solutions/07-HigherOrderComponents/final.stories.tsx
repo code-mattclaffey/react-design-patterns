@@ -3,13 +3,12 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Final } from './final';
 
 const meta: Meta<typeof Final> = {
-  title: 'Lessons/07 - Higher Order Components Pattern 🚧/03-Final',
+  title: 'Lessons/07 - Higher Order Components Pattern/03-Final',
   component: Final
 };
 
 export default meta;
 type Story = StoryObj<typeof Final>;
-
 
 /*
  * See https://storybook.js.org/docs/writing-stories/play-function#working-with-the-canvas
@@ -17,5 +16,7 @@ type Story = StoryObj<typeof Final>;
  */
 export const Default: Story = {
   play: async () => {},
-  args: {}
+  args: {
+    title: 'Pokemon Cards'
+  }
 };
