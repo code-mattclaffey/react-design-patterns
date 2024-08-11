@@ -1,5 +1,87 @@
 import { Meta } from '@storybook/blocks';
 
-<Meta title="Lessons/09 - State Reducer Pattern 🚧/01-Lesson" />
+<Meta title="Lessons/09 - State Reducer Pattern/01-Lesson" />
 
-# State Reducer Pattern 🚧
+# State Reducer Pattern
+
+When you have a component which has a lot of useState logic and it updates multiple state values are a sign to start refacotring over to using the State Reducer Pattern.
+
+The State Reducer Pattern is a design pattern that centralizes the logic for handling state transitions within a single reducer function. This approach is particularly useful when you need to manage complex state transitions or when multiple components need to share the same state logic. The reducer pattern makes the state logic more predictable, testable, and easier to maintain.
+
+The benefits to this approach are:
+
+- **Centralized Logic**: All state logic is in one place, making it easier to debug and reason about.
+- **Scalability**: As the complexity of state management increases, the reducer pattern helps maintain clarity.
+- **Reusability**: The reducer function can be reused across multiple components if they share the same state logic.
+
+## Example
+
+```jsx
+import React, { useReducer } from 'react';
+
+// 1. Initial State
+const initialState = {
+  count: 0,
+  isIncrementing: true
+};
+
+// 2. Action Types
+const INCREMENT = 'INCREMENT';
+const DECREMENT = 'DECREMENT';
+const TOGGLE_DIRECTION = 'TOGGLE_DIRECTION';
+
+// 3. Reducer Function
+function reducer(state, action) {
+  switch (action.type) {
+    case INCREMENT:
+      return {
+        ...state,
+        count: state.isIncrementing ? state.count + 1 : state.count
+      };
+    case DECREMENT:
+      return {
+        ...state,
+        count: !state.isIncrementing ? state.count - 1 : state.count
+      };
+    case TOGGLE_DIRECTION:
+      return {
+        ...state,
+        isIncrementing: !state.isIncrementing
+      };
+    default:
+      return state;
+  }
+}
+
+// 4. Component Integration
+function Counter() {
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  return (
+    <div>
+      <p>Count: {state.count}</p>
+      <button onClick={() => dispatch({ type: INCREMENT })}>
+        Increment
+      </button>
+      <button onClick={() => dispatch({ type: DECREMENT })}>
+        Decrement
+      </button>
+      <button onClick={() => dispatch({ type: TOGGLE_DIRECTION })}>
+        Toggle Direction
+      </button>
+    </div>
+  );
+}
+
+export default Counter;
+```
+
+## Exercise
+
+In this lesson we are going to carry on with the Pokemon grid but we are going to directly implement the PokemonManager using the state reducer pattern instead.
+
+## Feedback
+
+Feedback is a gift and it helps me make this course better for you. If you have a spare 5 mins please could you fill out a feedback form for me. Thank you.
+
+[Feedback](https://forms.gle/Apmts7dus66onmgw7)
