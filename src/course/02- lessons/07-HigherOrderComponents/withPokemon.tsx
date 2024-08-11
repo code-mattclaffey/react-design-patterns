@@ -46,7 +46,7 @@
 //   />
 // );
 
-// 🎉 Finished with this page.
+// 🎉 Finished with this file.
 // Take a step back and reflect what you have just done because this was more than just a HOC.
 // What you did was:
 /**

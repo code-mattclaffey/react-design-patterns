@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import {
   IPokemonManagerState,
   PokemonManager
-} from './PokemonManager';
+} from '../../../shared/modules/PokemonManager/PokemonManager';
 
 export interface IPokemonManagerActions {
   fetchPokemons: (total: number) => Promise<void>;

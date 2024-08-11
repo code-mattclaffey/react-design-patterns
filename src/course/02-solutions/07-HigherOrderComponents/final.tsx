@@ -1,6 +1,9 @@
 import { useEffect } from 'react';
 import { IPokemonManagerActions, withPokemons } from './withPokemon';
-import { IPokemon, IPokemonManagerState } from './PokemonManager';
+import {
+  IPokemon,
+  IPokemonManagerState
+} from '../../../shared/modules/PokemonManager/PokemonManager';
 
 interface IMapStateToPropsComponentOneResponse {
   pokemons: IPokemon[];
