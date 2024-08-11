@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import classNames from 'classnames';
 // 💣 You can get rid of this eslint error comment when finished.
+// @ts-ignore
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { useEffect, useRef, useState } from 'react';
 import FocusLock from 'react-focus-lock';
@@ -16,10 +18,12 @@ interface IModal {
 // For the full guide to making an accessible modal you can follow below to get every instance
 // ♿️ WCAG Modal Resource: https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/examples/alertdialog/
 // 💣 You can get rid of this eslint error comment when finished.
+// @ts-ignore
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Modal = ({
   isVisible,
   // 💣 You can get rid of this eslint error comment when finished.
+  // @ts-ignore
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   onClose,
   id,
@@ -36,6 +40,7 @@ const Modal = ({
   }, [isVisible]);
 
   // 💣 You can get rid of this eslint error comment when finished.
+  // @ts-ignore
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const onModalPress = (event: React.MouseEvent) => {
     // You may have noticed how we have added an onClose event to the container
@@ -99,7 +104,7 @@ export const Exercise = () => {
 
   return (
     <>
-      {/* 1d 👨🏻‍💻 Add the onClick={onOpen} event to the button 
+      {/* 1d 👨🏻‍💻 Add the onClick={onOpen} event to the button
       ✍🏻 This is an example of a Controlled component but in a HTML context.
       As a developer, we are providing the button with those props for the button
       to behave how we want it to behave, otherwise, it does nothing. */}
