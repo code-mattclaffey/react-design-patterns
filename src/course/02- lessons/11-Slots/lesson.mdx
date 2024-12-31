@@ -1,8 +1,54 @@
 import { Meta } from '@storybook/blocks';
 
-<Meta title="Lessons/11 - Slots 🚧/01-Lesson" />
+<Meta title="Lessons/11 - Slots/01-Lesson" />
 
-# Slots Pattern 🚧
+# Slots Pattern
+
+The slots pattern is very similar to the [render props pattern](?path=/docs/lessons-03-render-props-pattern-01-lesson--docs) but it has a slight difference which justifies why you would do one over the other.
+
+Here is an example of how you do a render prop pattern:
+
+```jsx
+const HelloWorld = ({ render }) => render({ hello: 'world' });
+
+// How you would use it.
+<HelloWorld render={({ hello }) => <p>{hello}</p>} />;
+```
+
+The key thing here is that we are passing some state from our react component which can be used with components outside. What if we didn't need the the hello prop? We could still use this pattern but an alternative would be a slot.
+
+## Children is a slot & a render prop
+
+Now the easiest way to form a connection with the wording of "slot" is to think of children. The children prop in React can either be a slot of a render prop in react.
+
+```
+{children} // slot
+{children({ hello: 'world' })} // render prop
+```
+
+## Using slots as props
+
+Here is an example of us using the HelloWorld example above.
+
+```jsx
+const HelloWorld = ({ slot }) => <h1>Hello {slot}</h1>;
+
+// How you would use it.
+<HelloWorld slot={<span>World</span>} />;
+```
+
+The pros to using this approach are:
+
+- Useful for layout components where you make the responsibility of the layout purely column based and port the header/footer/nav using slots.
+- Removing many if statements and prop drilling from your presentational component
+
+The cons of using this approach:
+
+- If you need to use the same UI in multiple places you will duplicate code (can be solved by making an abstraction component)
+
+## Exercise
+
+So in the exercise we have a task to extend the functionality of our Button component. The design team want to be able to put an icon on the left side of the button and/or on the right side. Our task is to implement this feature in a way so that any icon can be put inside this component.
 
 ## Feedback
 
