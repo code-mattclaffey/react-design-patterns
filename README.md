@@ -28,3 +28,14 @@ export default {
 - Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
 - Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
 - Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+
+
+## Troubleshooting
+
+When you install if you get this error:
+
+```bash
+Error: Cannot find module './node_modules/browser-assert/lib/assert.js'. Please verify that the package.json has a valid "main" entry
+```
+
+Just remove node modules and reinstall.
