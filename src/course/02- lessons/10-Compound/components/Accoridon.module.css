@@ -1,0 +1,38 @@
+.accordionPanel {
+  @apply py-0;
+  @apply px-4;
+  @apply h-0;
+  @apply transition-all;
+  @apply duration-300;
+}
+
+.accordionItem:focus-within .accordionPanel,
+.accordionPanelSelected {
+  @apply p-4;
+  @apply h-auto;
+  @apply max-h-[1000px];
+  @apply transition-all;
+  @apply duration-300;
+}
+
+.accordionButton {
+  @apply bg-blue-100;
+  @apply hover:bg-blue-200;
+  @apply text-blue-950;
+}
+
+.accordionItem:focus-within .accordionButton,
+.accordionButtonSelected {
+  @apply bg-blue-950;
+  @apply hover:bg-blue-950;
+  @apply text-white;
+}
+
+.accordionIcon {
+  @apply rotate-[-90deg];
+}
+
+.accordionItem:focus-within .accordionIcon,
+.accordionButtonSelected .accordionIcon {
+  @apply rotate-0;
+}

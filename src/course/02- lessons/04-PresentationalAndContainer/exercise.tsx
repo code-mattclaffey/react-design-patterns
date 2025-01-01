@@ -19,6 +19,8 @@ interface IPaymentTemplate {
 // 1A 👨🏻‍💻 - Migrate the JSX from BrandPage One into the PaymentTemplate.
 // 🤔 Think about where that local state should live. It's not business logic so copy over the
 // showBillingAddress functionality as well.
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 const PaymentTemplate = ({}: IPaymentTemplate) => null;
 

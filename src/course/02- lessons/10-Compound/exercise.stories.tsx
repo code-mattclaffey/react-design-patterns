@@ -1,10 +1,10 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from '@storybook/react';
 
-import { Exercise } from "./exercise";
+import { Exercise } from './exercise';
 
 const meta: Meta<typeof Exercise> = {
-  title: "Lessons/10 - Compound Components Pattern 🚧/02-Exercise",
-  component: Exercise,
+  title: 'Lessons/10 - Compound Components Pattern/02-Exercise',
+  component: Exercise
 };
 
 export default meta;
@@ -16,5 +16,5 @@ type Story = StoryObj<typeof Exercise>;
  */
 export const Default: Story = {
   play: async () => {},
-  args: {},
+  args: {}
 };
