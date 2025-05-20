@@ -22,6 +22,7 @@ interface IPaymentTemplate {
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
+// eslint-disable-next-line @typescript-eslint/no-unused-vars, no-empty-pattern
 const PaymentTemplate = ({}: IPaymentTemplate) => null;
 
 // 1B 👨🏻‍💻 - Use the Payment template and pass down the props it needs
