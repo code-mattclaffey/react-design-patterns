@@ -1,0 +1,58 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Lessons/🥈 Sliver/Controlled Components Pattern/01-Lesson" />
+
+# Controlled Components Pattern
+
+The concept of controlled components involves creating components with highly predictable behavior by managing their state through props. A controlled components behavior changes based on the state passed to it as a prop.
+
+In the example below, the component’s visibility is controlled by a prop, and it also accepts an onClose prop. In the parent component, invoking the onClose prop will hide the component. Clicking the "open" button in the parent component will then restore the components visibility.
+
+```jsx
+const Component = ({ isVisible, onClose }) => {
+  return (
+    <div hidden={!isVisible}>
+      <button type="button" onClick={onClose}>
+        Close me
+      </button>
+    </div>
+  );
+};
+
+const Page = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  const onClose = () => {
+    setIsVisible(false);
+  };
+
+  const onOpen = () => {
+    setIsVisible(true);
+  };
+
+  return (
+    <>
+      <button type="button" onClick={onOpen}>
+        Open
+      </button>
+      <Component isVisible={isVisible} onClose={onClose} />
+    </>
+  );
+};
+```
+
+This is good for components like a modal as they require state changes to happen outside of themselves before they appear in the browser. For example: I click a button like in the example above, it updates some state and then it renders the modal.
+
+## Exercise
+
+In this exercise we are going to build a Modal component which will be controlled via props.
+
+The task: The client has asked you to add a button on the page which will display more information in a popup once it is clicked.
+
+Head over to the exercise and let's get started.
+
+## Feedback
+
+Feedback is a gift and it helps me make this course better for you. If you have a spare 5 mins please could you fill out a feedback form for me. Thank you.
+
+[Feedback](https://github.com/code-mattclaffey/react-design-patterns/issues/new)

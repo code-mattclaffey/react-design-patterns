@@ -1,0 +1,95 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Lessons/🥉 Bronze/Conditional Rendering Pattern/01-Lesson" />
+
+# Conditional Rendering Pattern
+
+The conditional rendering pattern is a way to dynamically change UI based what values are set at that time. The most common way that this is done is by using an if statement. For example:
+
+```jsx
+const Component = (props) => {
+  if (props.isAuthenticated) {
+    return <h1>Welcome {props.username}!</h1>;
+  } else {
+    return <h1>Not logged in.</h1>;
+  }
+};
+```
+
+There are many syntactical ways you can do the same as above such as the ternary:
+
+```jsx
+const Component = (props) => {
+  return props.isAuthenticated ? (
+    <h1>Welcome {props.username}!</h1>
+  ) : (
+    <h1>Not logged in.</h1>
+  );
+};
+```
+
+Or you can use the AND syntax:
+
+```jsx
+const Component = (props) => {
+  return props.isAuthenticated && <h1>Welcome {props.username}!</h1>;
+};
+```
+
+If I had a lot of complexity in this component that still would be getting executed but the component will just return nothing if it's not authenticated. The best way to return something like this is to do the conditional render outside of the component, for example:
+
+```jsx
+const ComponentOne = (props) => {
+  return <h1>Welcome {props.username}</h1>;
+};
+
+const ComponentTwo = (props) => {
+  return (
+    <header>
+      {/* Other components */}
+      {props.isAuthenticated && <ComponentOne username="JohnDoe" />}
+    </header>
+  );
+};
+```
+
+### Event driven rendering
+
+There may be times when you need to conditionally render a component based on an event that has been changed. This example conditionally renders a box when you click the button.
+
+```jsx
+const Component = () => {
+  const [displayBox, setDisplayBox] = useState(false);
+
+  const showBox = () => {
+    setDisplayBox(true);
+  };
+
+  const hideBox = () => {
+    setDisplayBox(false);
+  };
+
+  return (
+    <>
+      <button type="button" onClick={displayBox ? hideBox : showBox}>
+        Toggle Box
+      </button>
+      {displayBox && (
+        <div>
+          <p>Box</p>
+        </div>
+      )}
+    </>
+  );
+};
+```
+
+## Exercise
+
+In the first exercise we are going to look into building a login and logout toggle which will render a username when they have logged in. Go to the exercise.tsx inside the ConditionalRendering folder and start the exercise. Once completed, the Tests will show as passed in the storybook "Interactions" addon section.
+
+## Feedback
+
+Feedback is a gift and it helps me make this course better for you. If you have a spare 5 mins please could you fill out a feedback form for me. Thank you.
+
+[Feedback](https://github.com/code-mattclaffey/react-design-patterns/issues/new)
