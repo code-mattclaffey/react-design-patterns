@@ -1,0 +1,55 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Lessons/🥈 Sliver/Portals/01-Lesson" />
+
+# Portals Pattern
+
+A React portal lets you render some children into a different part of the DOM. When you call the **createPortal** it will trigger the creation of the portal. When you unmount, the portal removes itself. This is how it looks in React:
+
+```jsx
+import { createPortal } from 'react-dom';
+
+// ...
+
+<div>
+  <p>This child is placed in the parent div.</p>
+  {createPortal(
+    <p>This child is placed in the document body.</p>,
+    document.body
+  )}
+</div>;
+```
+
+Which in html, will translate to:
+
+```html
+<html>
+  <head>
+    <title>My react app</title>
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        <p>This child is placed in the parent div.</p>
+      </div>
+    </div>
+
+    <p>This child is placed in the document body.</p>
+  </body>
+</html>
+```
+
+Portal benefits:
+
+- Simplified state management
+- No clashes with z-index as the modal is at the root of the DOM.
+
+## Exercise
+
+In the current application when a customer clicks the checkout cta and the payment popup appears, the customer cannot click the pay now button in the modal.
+
+## Feedback
+
+Feedback is a gift and it helps me make this course better for you. If you have a spare 5 mins please could you fill out a feedback form for me. Thank you.
+
+[Feedback](https://github.com/code-mattclaffey/react-design-patterns/issues/new)

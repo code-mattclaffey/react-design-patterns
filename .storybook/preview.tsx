@@ -12,7 +12,12 @@ const preview: Preview = {
         code: Code
       }
     },
-    storySort: ['Introduction', 'Lessons', 'Recipes'],
+    storySort: [
+      'Introduction',
+      'Lessons',
+      ['🥉 Bronze', '🥈 Silver', '🥇 Gold'],
+      'Recipes'
+    ],
     controls: {
       matchers: {
         color: /(background|color)$/i,
