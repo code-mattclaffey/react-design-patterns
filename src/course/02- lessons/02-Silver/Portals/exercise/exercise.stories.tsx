@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Exercise } from './exercise';
 
 const meta: Meta<typeof Exercise> = {
-  title: 'Lessons/🥈 Sliver/Portals/02-Exercise',
+  title: 'Lessons/🥈 Silver/Portals/02-Exercise',
   component: Exercise
 };
 

@@ -1,0 +1,103 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Lessons/🥈 Silver/Polymorphic Components/01-Lesson" />
+
+# Polymorphic Components Pattern
+
+React excels at building reusable components, but repetition can creep in when components only differ slightly—like headings or buttons with varied HTML tags.
+
+Consider this:
+
+```jsx
+export const Paragraph = ({ children }) => (
+  <p className="p">{children}</p>
+);
+export const HeadingOne = ({ children }) => (
+  <h1 className="h1">{children}</h1>
+);
+export const HeadingTwo = ({ children }) => (
+  <h2 className="h2">{children}</h2>
+);
+export const HeadingThree = ({ children }) => (
+  <h3 className="h3">{children}</h3>
+);
+```
+
+Each of these components is nearly identical. This isn't scalable and can be difficult to maintain. The **polymorphic component pattern** solves this by allowing you to render different HTML elements using a single component, often via an **as** prop.
+
+## Who else does this?
+
+Most modern UI libraries (like Chakra UI or Radix UI) support polymorphic components. The **as** prop lets developers choose the HTML tag to render, giving flexibility while keeping styling and logic consistent.
+
+Example:
+
+```JSX
+<Heading as="h3" size="h4">
+  My heading is a h3 tag but styled like a h4.
+</Heading>
+```
+
+This would render as:
+
+```jsx
+<h3 class="h4">My heading is a h3 tag but styled like a h4.</h3>
+```
+
+## Implementation
+
+Here’s a simple implementation of a polymorphic **Heading** component:
+
+```jsx
+export const Heading = ({
+  as: Component = 'h2',
+  size = 'h2',
+  children
+}) => {
+  return <Component className={size}>{children}</Component>;
+};
+```
+
+> 💡 **Tip:** When rendering dynamic elements in React, make sure your **as** value (e.g., **Component**) is capitalized or passed as a variable. React treats lowercase JSX tags as native HTML.
+
+## Why use this pattern?
+
+This pattern is extremely useful in design systems, especially when building:
+
+- Typography components
+- Buttons
+- Form elements
+- Reusable layout primitives
+
+It ensures your components stay flexible while keeping semantic HTML and accessible markup intact.
+
+Here's a quick visual guide:
+
+| Usage                         | Renders As | Styled As |
+| ----------------------------- | ---------- | --------- |
+| **Heading**                   | **h2**     | **h2**    |
+| **Heading as="h3"**           | **h3**     | **h2**    |
+| **Heading as="h3" size="h4"** | **h3**     | **h4**    |
+
+## Exercise
+
+### Scenario
+
+The software engineering group are using a Heading component and it works fairly well from an implementation point of view but there is often friction between the design teams and developers around design consistency vs accessibility.
+
+The previous developer built a heading component using the right intentions however, the flexibility of the component is a little rigid.
+
+### What we are going to do?
+
+In today’s exercise, we’re going to refactor this component to use the Polymorphic pattern.
+
+It should:
+
+1. Render a semantic HTML tag based on the **as** prop BUT we have typescript in place to only allow for the heading tags and p tags.
+2. Apply a CSS class based on a **size** prop (defaulting to the tag if **size** is not provided).
+3. Fall back to defaults (p, p) if neither is provided.
+
+## Feedback
+
+Feedback is a gift and it helps me make these courses better for you. If you have 5 minutes, I’d love for you to fill out the feedback form:
+
+[Feedback](https://github.com/code-mattclaffey/react-design-patterns/issues/new)

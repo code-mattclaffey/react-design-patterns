@@ -1,5 +1,6 @@
 import type { StorybookConfig } from '@storybook/react-vite';
 import { mergeConfig } from 'vite';
+import remarkGfm from 'remark-gfm';
 import path from 'path';
 
 const config: StorybookConfig = {
@@ -11,7 +12,17 @@ const config: StorybookConfig = {
     '@storybook/addon-onboarding',
     '@storybook/addon-links',
     '@storybook/addon-interactions',
-    '@storybook/addon-essentials'
+    '@storybook/addon-essentials',
+    {
+      name: '@storybook/addon-docs',
+      options: {
+        mdxPluginOptions: {
+          mdxCompileOptions: {
+            remarkPlugins: [remarkGfm]
+          }
+        }
+      }
+    }
   ],
   framework: {
     name: '@storybook/react-vite',

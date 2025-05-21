@@ -4,7 +4,7 @@ import { Exercise } from './exercise';
 
 const meta: Meta<typeof Exercise> = {
   title:
-    'Lessons/🥈 Sliver/Controlled Components Pattern/02-Exercise',
+    'Lessons/🥈 Silver/Controlled Components Pattern/02-Exercise',
   component: Exercise
 };
 
