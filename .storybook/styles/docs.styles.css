@@ -27,3 +27,7 @@
 .sbdocs-content h3 {
   font-size: 1.75rem;
 }
+
+.sbdocs-content ol {
+  list-style: decimal;
+}
