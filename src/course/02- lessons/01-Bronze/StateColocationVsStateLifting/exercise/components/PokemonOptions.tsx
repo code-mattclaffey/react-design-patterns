@@ -32,9 +32,9 @@ export const PokemonOptions = ({ type }: IPokemonOptions) => {
     // 🧑🏻‍💻 2.j: call onPokemonSelection(selectedPokemon, type);
   };
 
-  // 💣 Can remove this comment once the code has been written
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const togglePokemonSelection = (pokemonId: string) => {
+    // 💣 We can get rid of this line once we start using the type param.
+    console.log(pokemonId);
     // 🧑🏻‍💻 2.g: We need to now update the state for when a pokemon card is selected or not.
     // IF selectedPokemon includes the pokemonId then we need to de-select that pokemon card.
     // ELSE we add the pokemon id to the array of pokemon cards [...selectedPokemon, pokemonId] and then setSelectedPokemon(newValues) (make this a variable as we will need it for later.)

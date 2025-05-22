@@ -25,9 +25,9 @@ export const Form = () => {
     // Once completed, head over to Screen.tsx as the Form component will be complaining about a missing prop.
   };
 
-  // 💣 We can get rid of the eslint line once we start using the type param.
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const onPokemonTypeSelection = (type: string) => {
+    // 💣 We can get rid of this line once we start using the type param.
+    console.log(type);
     // 🧑🏻‍💻 1.e: we need to check IF the selectedPokemonTypes already has the selectedType
     // because we need to toggle it on and off. If it is selected, we just setSelectedPokemonTypes with the filtered out type
     // if it's not in there then we set the type [...selectedPokemonTypes, type];
