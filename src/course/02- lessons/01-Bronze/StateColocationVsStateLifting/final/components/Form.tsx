@@ -75,15 +75,15 @@ export const Form = ({ onPokemonTypesUpdate }: IForm) => {
                 <label
                   key={pokemonType}
                   className={classNames(
-                    'bg-white p-3 font-bold rounded-md cursor-pointer relative',
+                    'p-3 font-bold rounded-md cursor-pointer relative',
                     !hasSelectedAllOptions &&
                       !isSelected &&
-                      'hover:bg-slate-200 focus-within:bg-slate-200',
+                      'bg-white hover:bg-slate-200 focus-within:bg-slate-200',
                     isSelected &&
                       'bg-blue-600 text-white focus-within:bg-blue-700 hover:bg-blue-700',
                     hasSelectedAllOptions &&
                       !isSelected &&
-                      'opacity-80 cursor-not-allowed'
+                      'bg-white opacity-80 cursor-not-allowed'
                   )}
                 >
                   {pokemonType}
