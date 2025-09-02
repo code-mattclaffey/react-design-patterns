@@ -11,7 +11,7 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "npm run build && storybook build -o dist/storybook",
     "test": "test-storybook",
-    "audit": "better-npm-audit audit --production --exclude 1102459"
+    "audit": "better-npm-audit audit --production --exclude 1102459 --level=high"
   },
   "dependencies": {
     "@vercel/analytics": "^1.3.1",
