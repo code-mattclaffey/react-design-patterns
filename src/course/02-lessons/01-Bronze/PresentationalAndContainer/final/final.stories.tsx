@@ -4,7 +4,7 @@ import { BrandPageOne, BrandPageTwo } from './final';
 
 const meta: Meta<typeof BrandPageOne> = {
   title:
-    'Lessons/🥉 Bronze/Presentational & Container Pattern/03-Final',
+    'Lessons/🥉 Bronze/🎭 Presentational & Container Pattern/03-Final',
   component: BrandPageOne
 };
 

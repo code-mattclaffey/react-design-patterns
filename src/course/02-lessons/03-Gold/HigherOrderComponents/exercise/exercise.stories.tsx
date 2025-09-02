@@ -4,7 +4,7 @@ import { Exercise } from './exercise';
 
 const meta: Meta<typeof Exercise> = {
   title:
-    'Lessons/🥇 Gold/Higher Order Components Pattern/02-Exercise',
+    'Lessons/🥇 Gold/🎆 Higher Order Components Pattern/02-Exercise',
   component: Exercise
 };
 

@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Final } from './exercise';
 
 const meta: Meta<typeof Final> = {
-  title: 'Lessons/🥇 Gold/Error Boundaries/02-Exercise',
+  title: 'Lessons/🥇 Gold/🛡️ Error Boundaries Pattern/02-Exercise',
   component: Final
 };
 
