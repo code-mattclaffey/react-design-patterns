@@ -11,7 +11,6 @@ const theme = create({
   brandTitle: '⚛️ React Design Patterns',
   brandUrl: 'https://example.com',
   brandTarget: '_self',
-  //
   colorPrimary: '#ffffff',
   colorSecondary: '#A599E9',
 
