@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Final } from './final';
 
 const meta: Meta<typeof Final> = {
-  title: 'Lessons/🥉 Bronze/Hooks Pattern/03-Final',
+  title: 'Lessons/🥉 Bronze/🎣 Hooks Pattern/03-Final',
   component: Final
 };
 
