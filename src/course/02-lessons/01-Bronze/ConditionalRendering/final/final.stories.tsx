@@ -1,17 +1,19 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { userEvent, within, expect } from '@storybook/test';
-import { ComponentOne } from './final';
 
-const meta: Meta<typeof ComponentOne> = {
-  title: 'Lessons/🥉 Bronze/Conditional Rendering Pattern/03-Final',
-  component: ComponentOne
+import { PokemonTrainerStatus } from './final';
+
+const meta: Meta<typeof PokemonTrainerStatus> = {
+  title:
+    'Lessons/🥉 Bronze/🔀 Conditional Rendering Pattern/03-Final',
+  component: PokemonTrainerStatus
 };
 
 export default meta;
-type Story = StoryObj<typeof ComponentOne>;
+type Story = StoryObj<typeof PokemonTrainerStatus>;
 
-const username = 'John Doe';
+const trainerName = 'Ash';
 
 /*
  * See https://storybook.js.org/docs/writing-stories/play-function#working-with-the-canvas
@@ -22,28 +24,22 @@ export const Default: Story = {
     const canvas = within(canvasElement);
 
     await userEvent.click(
-      canvas.getByRole('button', { name: 'Login' })
+      canvas.getByRole('button', { name: '🎯 Challenge Gym Leader' })
     );
 
     await expect(
-      canvas.getByText(`Welcome ${username}`)
+      canvas.getByText(`Welcome Gym Leader ${trainerName}! 🏆`)
     ).toBeInTheDocument();
-    await expect(
-      canvas.queryByRole('button', { name: 'Login' })
-    ).toBeNull();
 
     await userEvent.click(
-      canvas.getByRole('button', { name: 'Logout' })
+      canvas.getByRole('button', { name: '🔄 Reset Journey' })
     );
 
     await expect(
-      canvas.queryByText(`Welcome ${username}`)
-    ).toBeNull();
-    await expect(
-      canvas.queryByRole('button', { name: 'Logout' })
-    ).toBeNull();
+      canvas.getByRole('button', { name: '🎯 Challenge Gym Leader' })
+    ).toBeInTheDocument();
   },
   args: {
-    username
+    trainerName
   }
 };
