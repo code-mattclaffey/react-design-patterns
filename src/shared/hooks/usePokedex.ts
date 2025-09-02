@@ -67,13 +67,17 @@ export const usePokedex = <TResponse>({
         const response = await fetch(
           `https://api.pokemontcg.io/v2/${path}?${queryParams}`
         );
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
         const json = await response.json();
 
         dispatch({ type: 'SUCCESS', payload: json.data });
       } catch (e) {
         dispatch({ type: 'ERROR' });
-
-        console.error('Error');
+        console.error('Failed to fetch Pokemon data:', e instanceof Error ? e.message : 'Unknown error');
       }
     };
 
