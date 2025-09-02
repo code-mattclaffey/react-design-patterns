@@ -16,12 +16,14 @@ type TTypesApi = {
   path: 'types';
   skip?: boolean;
   queryParams?: string;
+  fail?: boolean;
 };
 
 type TCardsApi = {
   path: 'cards';
   queryParams?: string;
   skip?: boolean;
+  fail?: boolean;
 };
 
 interface IUsePokedexState<TResponse> {
@@ -50,7 +52,8 @@ const usePokedexReducer = <TResponse>(
 export const usePokedex = <TResponse>({
   path,
   queryParams = '',
-  skip = false
+  skip = false,
+  fail = false
 }: TCardsApi | TTypesApi): IUsePokedexState<TResponse> => {
   const [state, dispatch] = useReducer(usePokedexReducer<TResponse>, {
     isError: false,
@@ -73,6 +76,10 @@ export const usePokedex = <TResponse>({
         }
         
         const json = await response.json();
+
+        if (fail) {
+          throw new Error('Error');
+        }
 
         dispatch({ type: 'SUCCESS', payload: json.data });
       } catch (e) {
