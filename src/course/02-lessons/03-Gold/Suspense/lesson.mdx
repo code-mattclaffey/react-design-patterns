@@ -1,0 +1,47 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Lessons/🥇 Gold/⏳ Suspense & Lazy Loading/01-Lesson" />
+
+# ⏳ Suspense & Lazy Loading
+
+Suspense allows you to declaratively handle loading states while React.lazy enables code splitting by dynamically importing components only when needed. This improves initial bundle size and loading performance.
+
+## Basic Example
+
+```jsx
+import { Suspense, lazy } from 'react';
+
+// Lazy load component
+const PokemonDetails = lazy(() => import('./PokemonDetails'));
+
+const App = () => (
+  <Suspense fallback={<div>Loading Pokemon...</div>}>
+    <PokemonDetails />
+  </Suspense>
+);
+```
+
+## Exercise
+
+In this exercise we have a Pokemon encyclopedia app that imports all Pokemon detail components upfront, creating a large initial bundle. Users might only view a few Pokemon, making this inefficient.
+
+Your task is to implement lazy loading with Suspense to split the code and only load Pokemon components when they're actually needed.
+
+Head over to the exercise file and let's begin.
+
+## When to use this pattern?
+
+**Use Suspense & Lazy Loading for:**
+- **Large Components**: Heavy components that aren't immediately needed
+- **Route-based Splitting**: Different pages/routes in your app
+- **Conditional Features**: Components shown based on user actions
+- **Performance**: Reducing initial bundle size
+
+**Avoid when:**
+- **Small Components**: Overhead isn't worth it for tiny components
+- **Critical Path**: Components needed immediately on page load
+- **Frequent Toggling**: Components that show/hide rapidly
+
+## Feedback
+
+[Feedback](https://github.com/code-mattclaffey/react-design-patterns/issues/new)
