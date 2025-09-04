@@ -38,7 +38,7 @@ jobs:
           node-version: 20
 
       - name: Install
-        run: npm ci
+        run: npm ci --force
 
       - name: Security Audit Checks
         run: npm run audit
