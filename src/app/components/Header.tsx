@@ -16,7 +16,7 @@ export const Header = () => {
 
           <div className="hidden md:flex items-center space-x-8">
             <a
-              href="#course"
+              href="/storybook"
               className="text-slate-300 hover:text-white transition-colors duration-200"
             >
               Course
@@ -37,9 +37,13 @@ export const Header = () => {
             </a>
           </div>
 
-          <button 
+          <button
             className="md:hidden text-white"
-            aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+            aria-label={
+              isMenuOpen
+                ? 'Close navigation menu'
+                : 'Open navigation menu'
+            }
             aria-expanded={isMenuOpen}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
@@ -53,7 +57,11 @@ export const Header = () => {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth={2}
-                d={isMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
+                d={
+                  isMenuOpen
+                    ? 'M6 18L18 6M6 6l12 12'
+                    : 'M4 6h16M4 12h16M4 18h16'
+                }
               />
             </svg>
           </button>

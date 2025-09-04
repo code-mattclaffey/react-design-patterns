@@ -6,7 +6,7 @@ export const Footer = () => {
           <div className="border-t border-blue-800 mb-4"></div>
           <div className="grid md:grid-cols-3 gap-8">
             <div className="md:col-span-2">
-              <div className="flex items-center space-x-3 mb-4">
+              <div className="flex items-center space-x-3 mb-8">
                 <div className="text-2xl">⚛️</div>
                 <div className="text-xl font-bold text-white">
                   React Design Patterns
