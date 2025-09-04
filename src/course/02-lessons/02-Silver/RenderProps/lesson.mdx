@@ -4,35 +4,42 @@ import { Meta } from '@storybook/blocks';
 
 # 🎨 Render Props Pattern
 
-Render props is a common pattern you will see in popular NPM packages like [Formik](https://formik.org/) or [React Final form](https://final-form.org/react) and it is very useful for building components that manage the logic and pass information to their children/prop so they can use that logic in the UI layer.
+Render props is a pattern where you pass a function as a prop (typically called **render**) that returns a React element. The component calls this function with data, allowing complete control over rendering.
 
-## With children
-
-```jsx
-const HelloWorld = ({ children }) => children({ hello: 'world' });
-
-// How you would use it.
-<HelloWorld>{({ hello }) => <p>{hello}</p>}</HelloWorld>;
-```
-
-## With props
+## Basic Example
 
 ```jsx
-const HelloWorld = ({ render }) => render({ hello: 'world' });
+const PokemonStats = ({ render }) => {
+  const stats = { hp: 340, attack: 284 };
+  return render(stats);
+};
 
-// How you would use it.
-<HelloWorld render={({ hello }) => <p>{hello}</p>} />;
+// Usage
+<PokemonStats
+  render={({ hp, attack }) => (
+    <div>
+      HP: {hp}, Attack: {attack}
+    </div>
+  )}
+/>;
 ```
 
 ## Exercise
 
-In this exercise we are going to create a simplfied version of the Field component which is commonly used within the libraries specified above. What we have in the code is a component which mixes three UI components (Label, TextField, ErrorMessage) with app logic which is tightly coupled together.
+In this exercise we have a Pokemon type effectiveness calculator that's tightly coupled with a specific display format. Different teams want to use the calculation logic but with their own display components.
 
-The task: We have multiple teams that want to use that visual element for their applications but they do not align with the app logic as their apps behave differently. They all want the ability to use the UI logic alone so they can handle the app logic their way.
-
-Our task is to refactor the UI out of the Field component and then pass props into the UI component using the render props pattern.
+Your task is to refactor the component to use the render props pattern with a **render** prop, separating the calculation logic from the display.
 
 Head over to the exercise file and let's begin.
+
+## Why use this pattern?
+
+Render props is valuable for:
+
+- **Explicit API**: Clear, named render prop instead of overloaded children
+- **Reusable Logic**: Share complex calculations across different UI implementations
+- **Library Design**: Common pattern in popular libraries like React Router and Formik
+- **Flexible Rendering**: Complete control over how data is displayed
 
 ## Feedback
 
