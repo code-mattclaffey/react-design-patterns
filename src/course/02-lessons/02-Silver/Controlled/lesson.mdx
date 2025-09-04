@@ -6,48 +6,57 @@ import { Meta } from '@storybook/blocks';
 
 The concept of controlled components involves creating components with highly predictable behavior by managing their state through props. A controlled components behavior changes based on the state passed to it as a prop.
 
-In the example below, the component’s visibility is controlled by a prop, and it also accepts an onClose prop. In the parent component, invoking the onClose prop will hide the component. Clicking the "open" button in the parent component will then restore the components visibility.
+In the example below, a Pokemon evolution modal's visibility is controlled by evolution conditions, and it accepts evolution callbacks. The parent component manages when evolution can occur based on level, stones, or friendship requirements.
 
 ```jsx
-const Component = ({ isVisible, onClose }) => {
+const EvolutionModal = ({ isOpen, pokemon, evolutionData, onConfirm, onCancel }) => {
   return (
-    <div hidden={!isVisible}>
-      <button type="button" onClick={onClose}>
-        Close me
-      </button>
+    <div hidden={!isOpen}>
+      <h2>{pokemon.name} is ready to evolve!</h2>
+      <p>Evolve into {evolutionData.name}?</p>
+      <button onClick={onConfirm}>Confirm Evolution</button>
+      <button onClick={onCancel}>Cancel</button>
     </div>
   );
 };
 
-const Page = () => {
-  const [isVisible, setIsVisible] = useState(false);
+const PokemonTrainer = () => {
+  const [showEvolution, setShowEvolution] = useState(false);
+  const [pokemon, setPokemon] = useState({ name: 'Charmander', level: 16 });
 
-  const onClose = () => {
-    setIsVisible(false);
+  const checkEvolution = () => {
+    if (pokemon.level >= 16) {
+      setShowEvolution(true);
+    }
   };
 
-  const onOpen = () => {
-    setIsVisible(true);
+  const confirmEvolution = () => {
+    setPokemon({ name: 'Charmeleon', level: pokemon.level });
+    setShowEvolution(false);
   };
 
   return (
     <>
-      <button type="button" onClick={onOpen}>
-        Open
-      </button>
-      <Component isVisible={isVisible} onClose={onClose} />
+      <button onClick={checkEvolution}>Check Evolution</button>
+      <EvolutionModal 
+        isOpen={showEvolution}
+        pokemon={pokemon}
+        evolutionData={{ name: 'Charmeleon' }}
+        onConfirm={confirmEvolution}
+        onCancel={() => setShowEvolution(false)}
+      />
     </>
   );
 };
 ```
 
-This is good for components like a modal as they require state changes to happen outside of themselves before they appear in the browser. For example: I click a button like in the example above, it updates some state and then it renders the modal.
+This is perfect for evolution modals as they require external conditions (level, items, friendship) to be met before they appear. The parent manages all evolution logic and state.
 
 ## Exercise
 
-In this exercise we are going to build a Modal component which will be controlled via props.
+In this exercise we are going to build a Pokemon Evolution Modal component which will be controlled via props.
 
-The task: The client has asked you to add a button on the page which will display more information in a popup once it is clicked.
+The task: The Pokemon trainer needs an evolution confirmation dialog that appears when their Pokemon meets evolution requirements. The modal should be controlled by the parent component managing evolution conditions.
 
 Head over to the exercise and let's get started.
 
