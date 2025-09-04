@@ -1,0 +1,108 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Lessons/🥉 Bronze/🔀 Conditional Rendering Pattern/01-Lesson" />
+
+# 🔀 Conditional Rendering Pattern
+
+The conditional rendering pattern is a way to dynamically change UI based on what values are set at that time. The most common way that this is done is by using an if statement. For example:
+
+```jsx
+const TrainerStatus = (props) => {
+  if (props.hasGymBadges) {
+    return <h1>Welcome Gym Leader {props.trainerName}!</h1>;
+  } else {
+    return <h1>Welcome Pokemon Trainer!</h1>;
+  }
+};
+```
+
+There are many syntactical ways you can do the same as above such as the ternary:
+
+```jsx
+const TrainerStatus = (props) => {
+  return props.hasGymBadges ? (
+    <h1>Welcome Gym Leader {props.trainerName}!</h1>
+  ) : (
+    <h1>Welcome Pokemon Trainer!</h1>
+  );
+};
+```
+
+Or you can use the AND syntax:
+
+```jsx
+const TrainerStatus = (props) => {
+  return props.hasGymBadges && <h1>Welcome Gym Leader {props.trainerName}!</h1>;
+};
+```
+
+If I had a lot of complexity in this component that still would be getting executed but the component will just return nothing if the trainer doesn't have badges. The best way to return something like this is to do the conditional render outside of the component, for example:
+
+```jsx
+const GymLeaderWelcome = (props) => {
+  return <h1>Welcome Gym Leader {props.trainerName}</h1>;
+};
+
+const TrainerDashboard = (props) => {
+  return (
+    <header>
+      {/* Other components */}
+      {props.hasGymBadges && <GymLeaderWelcome trainerName="Ash" />}
+    </header>
+  );
+};
+```
+
+### Event driven rendering
+
+There may be times when you need to conditionally render a component based on an event that has been changed. This example conditionally renders a wild Pokemon encounter when you click the explore button.
+
+```jsx
+const PokemonExplorer = () => {
+  const [wildPokemonFound, setWildPokemonFound] = useState(false);
+
+  const startExploring = () => {
+    setWildPokemonFound(true);
+  };
+
+  const stopExploring = () => {
+    setWildPokemonFound(false);
+  };
+
+  return (
+    <>
+      <button type="button" onClick={wildPokemonFound ? stopExploring : startExploring}>
+        {wildPokemonFound ? 'Stop Exploring' : 'Explore Tall Grass'}
+      </button>
+      {wildPokemonFound && (
+        <div className="wild-encounter">
+          <p>🌿 A wild Pikachu appeared!</p>
+        </div>
+      )}
+    </>
+  );
+};
+```
+
+## Exercise
+
+In the first exercise we are going to look into building a Pokemon trainer status system that shows different content based on whether the trainer has earned gym badges. Go to the exercise.tsx inside the ConditionalRendering folder and start the exercise. Once completed, the Tests will show as passed in the storybook "Interactions" addon section.
+
+## When to use this pattern?
+
+**Use conditional rendering for:**
+- **Dynamic UI**: Show/hide components based on state or props
+- **User Permissions**: Display content based on user roles
+- **Loading States**: Show spinners while data loads
+- **Error Handling**: Display error messages when needed
+
+**Avoid when:**
+- **Complex Logic**: Use separate components for complex conditions
+- **Performance**: Avoid heavy computations in render conditions
+- **Readability**: Don't nest too many ternary operators
+
+## Feedback
+
+Feedback is a gift and it helps me make this course better for you. If you have a spare 5 mins please could you fill out a feedback form for me. Thank you.
+
+[Feedback](https://github.com/code-mattclaffey/react-design-patterns/issues/new)

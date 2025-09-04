@@ -1,0 +1,1 @@
+export { DotPattern } from './DotPattern';

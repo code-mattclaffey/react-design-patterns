@@ -1,0 +1,53 @@
+name: Quality checks
+
+on:
+  push:
+    branches:
+      - main
+      - feature/**
+      - v2
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  quality_checks:
+    name: Quality checks
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.npm
+            ${{ github.workspace }}/dist/cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx') }}
+          restore-keys: |
+            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install
+        run: npm ci --force
+
+      - name: Security Audit Checks
+        run: npm run audit
+
+      - name: Static testing
+        run: npm run lint
+
+      - name: Build Website
+        run: npm run build
+
+      - name: Build Storybook
+        run: npm run build-storybook

@@ -1,0 +1,47 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Lessons/🥈 Silver/🔄 Render Children Pattern/01-Lesson" />
+
+# 🔄 Render Children Pattern
+
+Render Children is a pattern where you pass a render function through a custom prop (not children). This gives you explicit control over the API and allows multiple render functions.
+
+## Basic Example
+
+```jsx
+const PokemonLoader = ({ renderPokemon, renderLoading }) => {
+  const [pokemon, loading] = usePokemon();
+
+  if (loading) return renderLoading();
+  return renderPokemon(pokemon);
+};
+
+// Usage
+<PokemonLoader
+  renderPokemon={(pokemon) => <h1>{pokemon.name}</h1>}
+  renderLoading={() => <p>Loading Pokemon...</p>}
+/>;
+```
+
+## Exercise
+
+In this exercise we have a Pokemon search component that handles loading, success, and error states but only supports one fixed display format. Different teams need different ways to display search results.
+
+Your task is to refactor the search component to use render children pattern with separate render functions for each state.
+
+Head over to the exercise file and let's begin.
+
+## Why use this pattern?
+
+Render Children is valuable for:
+
+- **Multiple Render Functions**: Support different render functions for different states
+- **Explicit API**: Clear, named props instead of overloaded children
+- **Conditional Rendering**: Easy to handle multiple UI states
+- **Library Design**: Common in data fetching and state management libraries
+
+## Feedback
+
+Feedback is a gift and it helps me make this course better for you. If you have a spare 5 mins please could you fill out a feedback form for me. Thank you.
+
+[Feedback](https://github.com/code-mattclaffey/react-design-patterns/issues/new)

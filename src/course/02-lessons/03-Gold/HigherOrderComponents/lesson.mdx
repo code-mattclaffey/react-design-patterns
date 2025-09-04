@@ -1,0 +1,67 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Lessons/🥇 Gold/🎆 Higher Order Components Pattern/01-Lesson" />
+
+# 🎆 Higher Order Components (HOC)
+
+Higher Order Components are functions that take a component and return a new component with additional functionality. They're perfect for cross-cutting concerns like authentication, logging, or data fetching that you want to apply to multiple components.
+
+## Basic Example
+
+```jsx
+// HOC that adds Pokemon type styling
+const withPokemonType = (Component) => (props) => {
+  const getTypeColor = (type) => {
+    const colors = {
+      Fire: 'bg-red-100 border-red-300',
+      Water: 'bg-blue-100 border-blue-300',
+      Electric: 'bg-yellow-100 border-yellow-300'
+    };
+    return colors[type] || 'bg-gray-100 border-gray-300';
+  };
+
+  return (
+    <div
+      className={`p-4 border-2 rounded-lg ${getTypeColor(props.type)}`}
+    >
+      <Component {...props} />
+    </div>
+  );
+};
+
+// Usage
+const PokemonCard = ({ name, type }) => <h3>{name}</h3>;
+const StyledPokemonCard = withPokemonType(PokemonCard);
+
+// Renders with type-specific styling
+<StyledPokemonCard name="Pikachu" type="Electric" />;
+```
+
+## Exercise
+
+In this exercise we have Pokemon components that need common functionality like loading states, error handling, and type-based styling. Instead of duplicating this logic, we'll create HOCs to wrap components with these features.
+
+Your task is to create HOCs that add loading states, error boundaries, and Pokemon type styling to any component.
+
+Head over to the exercise file and let's begin.
+
+## When to use this pattern?
+
+**Use HOCs for:**
+
+- **Cross-cutting Concerns**: Authentication, logging, analytics
+- **Code Reuse**: Same functionality across multiple components
+- **Legacy Support**: Wrapping class components with modern features
+- **Third-party Integration**: Adding external library features
+
+**Avoid when:**
+
+- **Simple Logic**: Use hooks for simpler state management
+- **Modern React**: Prefer hooks and composition over HOCs
+- **Complex Props**: HOCs can make prop flow confusing
+
+## Feedback
+
+Feedback is a gift and it helps me make these course better for you. If you have a spare 5 mins please could you fill out a feedback form for me. Thank you.
+
+[Feedback](https://github.com/code-mattclaffey/react-design-patterns/issues/new)

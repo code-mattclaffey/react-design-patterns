@@ -1,0 +1,123 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Lessons/🥉 Bronze/🧼 State Colocation vs 🪜 State Lifting/01-Lesson" />
+
+---
+
+# 🧼 State Colocation vs 🪜 State Lifting
+
+Understanding the difference between **state colocation** and **state lifting** is crucial for managing state effectively in React apps. Although they both deal with the _placement_ of state, they serve **opposite purposes**.
+
+---
+
+## 🧼 State Colocation
+
+### What is it?
+
+Keep state **as close as possible** to where it’s needed.
+
+```jsx
+function SearchInput() {
+  const [query, setQuery] = useState(''); // colocated inside the component that needs it
+
+  return (
+    <input value={query} onChange={(e) => setQuery(e.target.value)} />
+  );
+}
+```
+
+### What It Means:
+
+Only the component that directly uses the state should own it. This minimizes prop drilling and makes the component more self-contained.
+
+### When to Use
+
+- Only one component uses the state
+- No need to share the state with siblings or parents
+
+### Benefits
+
+- Easier to maintain and test
+- Reduces unnecessary props
+- Keeps state logically scoped
+
+---
+
+## 🪜 State Lifting
+
+### What is it?
+
+Move state **up** the component tree to share it across multiple components.
+
+```jsx
+function Parent() {
+  const [count, setCount] = useState(0); // lifted up here
+
+  return (
+    <>
+      <Incrementer
+        count={count}
+        onIncrement={() => setCount(count + 1)}
+      />
+      <DisplayCount count={count} />
+    </>
+  );
+}
+```
+
+### What It Means
+
+If two or more components need access to or control over the same piece of state, lift it to their **closest common ancestor**.
+
+### When to Use
+
+- Two or more components need to read from or update the same state
+- You need synchronized behavior across sibling components
+
+### Benefits
+
+- Keeps state in sync
+- Prevents duplication or divergence of values
+- Encourages better separation of concerns
+
+---
+
+## 🧠 Summary Table
+
+| Pattern              | Goal                                       | Where State Lives       | When to Use                             |
+| -------------------- | ------------------------------------------ | ----------------------- | --------------------------------------- |
+| **State Colocation** | Keep state near the component that uses it | Inside the component    | When only one component needs the state |
+| **State Lifting**    | Share state across components              | Common parent component | When multiple components need the state |
+
+---
+
+## 🧠 Rule of Thumb
+
+- Use **colocation** by default.
+- Use **lifting** when you need to **share or sync state** between components.
+
+---
+
+## Exercise
+
+### Scenario
+
+You are creating a part of the new Pokemon Battle game and the screen you are working on is the "Pick your team" screen. We need to be able to choose up to four pokemon types and then choose 2 randomly picked pokemon from each type before we move onto the battle screen. The screen will work like this:
+
+1. You select four options from the form and select get Pokemon.
+2. You will then be presented a grid which will display four different Pokemon per type.
+3. You select two pokemon from each type to be your chosen pokemon for the battle
+4. You click Ready to battle.
+
+### What we are going to do?
+
+The lead developer on the team has structured how the screen should work:
+
+- **components/Screen** - manages the state selectedPokemonTypes & selectedPokemonForBattle and handles the updating of those variables.
+- **components/Form** - fetches all the pokemon types and displays a form where the player can select up to four types and then click get pokemon to update the screens state.
+- **components/PokemonOptions** - fetches the pokemon for the type it has been given, handles the selection of only 2 in each group and then updates the screens state.
+- **shared/hooks/usePokedex** - There is a reuseable react hook that we can already use in the form/pokemon options to display the data that we want to display. The pokedex has two apis known as "types" and "cards" api.
+
+## Issues
+
+Any issues or improvements to the course please raise [here](https://github.com/code-mattclaffey/react-design-patterns/issues/new).

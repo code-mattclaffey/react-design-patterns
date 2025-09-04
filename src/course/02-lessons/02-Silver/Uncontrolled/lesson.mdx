@@ -1,0 +1,70 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Lessons/🥈 Silver/🎮 Uncontrolled Components/01-Lesson" />
+
+# 🎮 Uncontrolled Components
+
+Uncontrolled components manage their own state internally using refs instead of React state. The DOM itself becomes the "source of truth" for the form data, making them useful for simple forms or when integrating with non-React code.
+
+## Basic Example
+
+```jsx
+// Using refs
+const PokemonNameForm = () => {
+  const nameRef = useRef();
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Pokemon name:', nameRef.current.value);
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input ref={nameRef} defaultValue="Pikachu" />
+      <button type="submit">Submit</button>
+    </form>
+  );
+};
+
+// Using FormData (modern approach)
+const PokemonNameForm = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    console.log('Pokemon name:', formData.get('pokemonName'));
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input name="pokemonName" defaultValue="Pikachu" />
+      <button type="submit">Submit</button>
+    </form>
+  );
+};
+```
+
+## Exercise
+
+In this exercise we have a Pokemon team registration form that uses controlled components with lots of state management. For simple forms like this, uncontrolled components can reduce complexity and boilerplate code.
+
+Your task is to refactor the form to use uncontrolled components with refs, removing the need for state management while maintaining the same functionality.
+
+Head over to the exercise file and let's begin.
+
+## When to use this pattern?
+
+**Use uncontrolled components for:**
+- **Simple Forms**: Basic forms without complex validation
+- **Performance**: When you want to avoid re-renders on input changes
+- **Third-party Integration**: Easier integration with non-React libraries
+- **Default Values**: When you just need initial form values
+
+**Avoid uncontrolled components when:**
+- **Real-time Validation**: You need to validate as users type
+- **Dynamic UI**: Form fields depend on other field values
+- **Complex UX**: Conditional enabling/disabling of form elements
+- **Immediate Feedback**: You need to show live character counts, formatting, etc.
+
+## Feedback
+
+[Feedback](https://github.com/code-mattclaffey/react-design-patterns/issues/new)

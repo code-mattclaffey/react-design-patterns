@@ -1,0 +1,73 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Lessons/🥉 Bronze/🎰 Slots Pattern/01-Lesson" />
+
+# 🎰 Slots Pattern
+
+The slots pattern is very similar to the [render props pattern](?path=/docs/lessons-03-render-props-pattern-01-lesson--docs) but it has a slight difference which justifies why you would do one over the other.
+
+Here is an example of how you do a render prop pattern:
+
+```jsx
+const MapArea = ({ render }) => render({ area: 'forest', pokemonCount: 3 });
+
+// How you would use it.
+<MapArea render={({ area, pokemonCount }) => <p>{area}: {pokemonCount} Pokemon</p>} />;
+```
+
+The key thing here is that we are passing some state from our react component which can be used with components outside. What if we didn't need the area data? We could still use this pattern but an alternative would be a slot.
+
+## Children is a slot & a render prop
+
+Now the easiest way to form a connection with the wording of "slot" is to think of children. The children prop in React can either be a slot of a render prop in react.
+
+```
+{children} // slot
+{children({ area: 'forest', pokemonCount: 3 })} // render prop
+```
+
+## Using slots as props
+
+Here is an example of us using a Pokemon map layout with slots.
+
+```jsx
+const PokemonMap = ({ northSlot, southSlot, eastSlot, westSlot, centerSlot }) => (
+  <div className="map-grid">
+    <div className="north">{northSlot}</div>
+    <div className="west">{westSlot}</div>
+    <div className="center">{centerSlot}</div>
+    <div className="east">{eastSlot}</div>
+    <div className="south">{southSlot}</div>
+  </div>
+);
+
+// How you would use it.
+<PokemonMap 
+  northSlot={<div>🌲 Forest</div>}
+  centerSlot={<div>🏠 Pallet Town</div>}
+  southSlot={<div>🌊 Route 1</div>
+  eastSlot={<div>⚡ Power Plant</div>}
+  westSlot={<div>🏔️ Mt. Silver</div>}
+/>;
+```
+
+The pros to using this approach are:
+
+- Useful for layout components where you make the responsibility of the layout purely slot-based and port different areas/locations using slots.
+- Removing many if statements and prop drilling from your presentational component
+- Flexible map layouts for different regions (Kanto, Johto, etc.)
+- Easy to swap out different locations without changing the map structure
+
+The cons of using this approach:
+
+- If you need to use the same UI in multiple places you will duplicate code (can be solved by making an abstraction component)
+
+## Exercise
+
+So in the exercise we have a task to create a Pokemon world map layout component. The Pokemon world needs to display different locations in specific positions: towns in the center, routes connecting them, and special areas like forests and mountains. Our task is to implement this using slots so that any location can be placed in any position on the map.
+
+## Feedback
+
+Feedback is a gift and it helps me make this course better for you. If you have a spare 5 mins please could you fill out a feedback form for me. Thank you.
+
+[Feedback](https://github.com/code-mattclaffey/react-design-patterns/issues/new)

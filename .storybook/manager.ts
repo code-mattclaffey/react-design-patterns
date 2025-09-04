@@ -9,38 +9,38 @@ const theme = create({
   fontCode: 'monospace',
 
   brandTitle: '⚛️ React Design Patterns',
-  brandUrl: 'https://example.com',
-  brandTarget: '_self',
-  //
-  colorPrimary: '#ffffff',
-  colorSecondary: '#A599E9',
+  brandUrl:
+    'https://github.com/code-mattclaffey/react-design-patterns',
+  brandTarget: '_blank',
+  colorPrimary: '#3b82f6', // blue-500
+  colorSecondary: '#A599E9', // code-500 from tailwind config
 
-  // UI
-  appBg: '#1E1E3F',
-  appContentBg: '#2D2B55',
+  // UI - matching main page blue-950 theme
+  appBg: '#172554', // blue-950
+  appContentBg: '#1e3a8a', // blue-900
   appPreviewBg: '#ffffff',
-  appBorderColor: '#2D2B55',
-  appBorderRadius: 4,
+  appBorderColor: '#1e40af', // blue-800
+  appBorderRadius: 8,
 
-  // Text colors
+  // Text colors - matching main page
   textColor: '#ffffff',
-  textInverseColor: '#ffffff',
+  textInverseColor: '#1e293b', // slate-800
 
-  // Toolbar default and active colors
-  barTextColor: '#ffffff',
+  // Toolbar colors - matching header
+  barTextColor: '#cbd5e1', // slate-300
   barSelectedColor: '#ffffff',
   barHoverColor: '#ffffff',
-  barBg: '#1E1E3F',
+  barBg: '#172554', // blue-950
 
   // Form colors
-  inputBg: '#ffffff',
-  inputBorder: '#35356b',
-  inputTextColor: '#1E1E3F',
-  inputBorderRadius: 2,
+  inputBg: '#1e40af', // blue-800
+  inputBorder: '#3b82f6', // blue-500
+  inputTextColor: '#ffffff',
+  inputBorderRadius: 6,
 
-  // Buttons
-  buttonBg: '#35356b',
-  buttonBorder: '#35356b',
+  // Buttons - matching CTA buttons
+  buttonBg: '#2563eb', // blue-600
+  buttonBorder: '#2563eb', // blue-600
   gridCellSize: 24
 });
 
