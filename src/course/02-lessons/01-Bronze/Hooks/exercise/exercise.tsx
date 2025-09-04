@@ -34,7 +34,7 @@ const WILD_POKEMON = [
   { id: 3, name: 'Pikachu', type: 'Electric', captureRate: 0.3 }
 ];
 
-// 1A 👨🏻💻 - We need to refactor this to be called usePokemonCapture
+// 1A 💻 - We need to refactor this to be called usePokemonCapture
 export const PokemonCaptureSystem = ({
   children
 }: IPokemonCaptureProps) => {
@@ -76,10 +76,10 @@ export const PokemonCaptureSystem = ({
   };
 
   const restockPokeballs = (amount: number = 5) => {
-    setPokeballs(prev => prev + amount);
+    setPokeballs((prev) => prev + amount);
   };
 
-  // 1C 👨🏻💻 - Just return the object instead of children
+  // 1C 💻 - Just return the object instead of children
   return children({
     wildPokemon,
     pokeballs,
@@ -96,7 +96,7 @@ export const PokemonCaptureSystem = ({
 // Let's make a component which uses the usePokemonCapture hook and takes an area prop
 
 export const Exercise = () => {
-  // 1E 👨🏻💻 - call the usePokemonCapture hook here
+  // 1E 💻 - call the usePokemonCapture hook here
   return (
     <div className="p-6 bg-green-50 rounded-lg">
       <h2 className="text-2xl font-bold mb-4">
@@ -123,7 +123,10 @@ export const Exercise = () => {
                   Captured: {capturedPokemon.length} Pokemon
                 </p>
               </div>
-              <Button onClick={() => restockPokeballs()} disabled={pokeballs >= 20}>
+              <Button
+                onClick={() => restockPokeballs()}
+                disabled={pokeballs >= 20}
+              >
                 🛍️ Buy Pokeballs (+5)
               </Button>
             </div>

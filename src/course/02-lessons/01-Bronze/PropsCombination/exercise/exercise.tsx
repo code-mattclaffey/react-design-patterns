@@ -2,7 +2,7 @@ import classnames from 'classnames';
 
 /*
 
-  1a👨🏻💻 group the following together:
+  1a💻 group the following together:
 
   * pokemon - pokemonName, pokemonType, pokemonHp, pokemonLevel
   * attack - attackName, attackDamage, attackDescription
@@ -31,7 +31,7 @@ interface IPokemonCardProps {
 }
 
 /*
-  1b👨🏻💻 Update the props to match the new grouped types defined above.
+  1b💻 Update the props to match the new grouped types defined above.
 */
 export const Exercise = ({
   pokemonName,
@@ -56,7 +56,7 @@ export const Exercise = ({
     2a 🤔 Could we destructure the image to be [small, medium, large]?
   */
   /*
-    1c👨🏻💻 Update the props in the jsx to use the grouped structure
+    1c💻 Update the props in the jsx to use the grouped structure
   */
   return (
     <article

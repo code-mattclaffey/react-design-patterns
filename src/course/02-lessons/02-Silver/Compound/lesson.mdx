@@ -6,23 +6,26 @@ import { Meta } from '@storybook/blocks';
 
 Compound components is an advanced React container pattern that provides a simple and efficient way for multiple components to share states and handle logic — working together.
 
-The compound components pattern provides an expressive and flexible API for communication between a parent component and its children. Also, the compound components pattern enables a parent component to interact and share state with its children implicitly, which makes it suitable for building declarative UI. A good example is the select html element:
+The compound components pattern provides an expressive and flexible API for communication between a parent component and its children. Also, the compound components pattern enables a parent component to interact and share state with its children implicitly, which makes it suitable for building declarative UI. A good example is a Pokemon team builder:
 
-```html
-<select>
-  <option value="javaScript">JavaScript</option>
-  <option value="python">Python</option>
-  <option value="java">Java</option>
-</select>
+```jsx
+<PokemonTeam>
+  <PokemonTeam.Slot position={1}>
+    <PokemonTeam.Pokemon name="Pikachu" level={25} />
+  </PokemonTeam.Slot>
+  <PokemonTeam.Slot position={2}>
+    <PokemonTeam.Pokemon name="Charizard" level={30} />
+  </PokemonTeam.Slot>
+</PokemonTeam>
 ```
 
-In the code above, the select element manages and shares its state implicitly with the options elements. Consequently, although there is no explicit state declaration, the select element knows what option the user selects.
+In the code above, the PokemonTeam component manages and shares its state implicitly with the Slot and Pokemon components. Consequently, although there is no explicit state declaration, the team knows which Pokemon are selected and their positions.
 
-The compound component pattern is useful in building complex React components such as a switch, tab switcher, accordion, dropdowns, tag list, and more. It can be implemented either by using the Context API or the React.cloneElement function.
+The compound component pattern is useful in building complex React components such as team builders, accordions, tab switchers, dropdowns, and more. It can be implemented either by using the Context API or the React.cloneElement function.
 
 ## Exercise
 
-A requirement has come in to reuse the accordion in another location of our application. The current implementation of the accordion has it's state management implemented only on the page that this component is used on. We need to refactor the component to use the compound design pattern so that it can be re-used on both pages. Head over to the exercise.tsx to continue.
+A requirement has come in to reuse the Pokemon team builder in another location of our application. The current implementation of the team builder has its state management implemented only on the page that this component is used on. We need to refactor the component to use the compound design pattern so that it can be re-used on both pages. Head over to the exercise.tsx to continue.
 
 ## Feedback
 
