@@ -1,0 +1,56 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Lessons/🥈 Silver/🎁 Provider Pattern/01-Lesson" />
+
+# 🎁 Provider Pattern
+
+The Provider Pattern is a design approach used to efficiently supply data to various parts of an application without the need to manually pass it down through multiple layers of components. In the context of React, this pattern helps avoid "prop drilling," where props have to be passed through each component in the hierarchy until they reach the desired component. Instead, by utilizing React Context, you can create a provider component that wraps parts of your app, making the necessary data or functionality available to all nested components. These components can then access the data or functions directly via custom React hooks, leading to cleaner, more maintainable code.
+
+## Example
+
+Here is an example of what a high level react context provider looks like:
+
+```jsx
+import { createContext, useContext } from 'react';
+
+const FooContext = createContext();
+
+const Component = () => {
+  const footext = useContext(FooContext);
+
+  return <p>{footext}</p>
+}
+
+const Page = () => {
+  return (
+    <FooContext.Provider value="bar">
+      <Component />
+    <FooContext.Provider />
+  );
+};
+```
+
+## Exercise
+
+In this lesson we are going to implement the PokemonManager with the react content pattern and pull that information from a hook in our component. Head over to the exercise.tsx file to get started.
+
+## When to use this pattern?
+
+**Use Provider pattern for:**
+
+- **Global State**: App-wide data like user authentication, themes
+- **Avoiding Prop Drilling**: When props pass through many components
+- **Shared Logic**: Common functionality across component trees
+- **Configuration**: App settings that many components need
+
+**Avoid when:**
+
+- **Local State**: Component-specific state should stay local
+- **Simple Apps**: Small apps don't need global state management
+- **Performance**: Context changes re-render all consumers
+
+## Feedback
+
+Feedback is a gift and it helps me make this course better for you. If you have a spare 5 mins please could you fill out a feedback form for me. Thank you.
+
+[Feedback](https://github.com/code-mattclaffey/react-design-patterns/issues/new)

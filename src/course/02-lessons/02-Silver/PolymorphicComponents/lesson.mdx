@@ -1,0 +1,116 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Lessons/🥈 Silver/🦄 Polymorphic Components Pattern/01-Lesson" />
+
+# 🦄 Polymorphic Components Pattern
+
+React excels at building reusable components, but repetition can creep in when components only differ slightly—like status effects that need different HTML elements based on context.
+
+Consider this Pokemon battle scenario:
+
+```jsx
+export const BurnedSpan = ({ children }) => (
+  <span className="burned">{children}</span>
+);
+export const ParalyzedButton = ({ children, onClick }) => (
+  <button className="paralyzed" onClick={onClick}>{children}</button>
+);
+export const PoisonedDiv = ({ children, turns }) => (
+  <div className="poisoned">Poisoned for {turns} turns</div>
+);
+export const SleepingListItem = ({ children }) => (
+  <li className="sleeping">{children}</li>
+);
+```
+
+Each of these components is nearly identical except for the HTML tag. This isn't scalable and can be difficult to maintain. The **polymorphic component pattern** solves this by allowing you to render different HTML elements using a single component, often via an **as** prop.
+
+## Who else does this?
+
+Most modern UI libraries (like Chakra UI or Radix UI) support polymorphic components. The **as** prop lets developers choose the HTML tag to render, giving flexibility while keeping styling and logic consistent.
+
+Example:
+
+```JSX
+<StatusEffect as="button" status="burned" onClick={heal}>
+  Burned - Click to heal
+</StatusEffect>
+
+<StatusEffect as="span" status="paralyzed" severity="mild">
+  Paralyzed
+</StatusEffect>
+
+<StatusEffect as="div" status="poisoned" turns={3}>
+  Badly Poisoned
+</StatusEffect>
+```
+
+This would render as:
+
+```jsx
+<button class="burned">Burned - Click to heal</button>
+<span class="paralyzed mild">Paralyzed</span>
+<div class="poisoned">Badly Poisoned</div>
+```
+
+## Implementation
+
+Here's a simple implementation of a polymorphic **StatusEffect** component:
+
+```jsx
+export const StatusEffect = ({
+  as: Component = 'span',
+  status = 'normal',
+  children,
+  ...props
+}) => {
+  return <Component className={status} {...props}>{children}</Component>;
+};
+```
+
+> 💡 **Tip:** When rendering dynamic elements in React, make sure your **as** value (e.g., **Component**) is capitalized or passed as a variable. React treats lowercase JSX tags as native HTML.
+
+## Why use this pattern?
+
+This pattern is extremely useful in design systems, especially when building:
+
+- Typography components (headings, paragraphs, labels)
+- Button variants (buttons, links, spans with click handlers)
+- Status indicators (badges, alerts, notifications)
+- Form elements that need semantic flexibility
+- Navigation components (links, buttons, divs)
+
+It ensures your components stay flexible while keeping semantic HTML and accessible markup intact.
+
+Here's a quick visual guide:
+
+| Usage                                    | Renders As | Status Class |
+| ---------------------------------------- | ---------- | ------------ |
+| **StatusEffect**                         | **span**   | **normal**   |
+| **StatusEffect as="button"**             | **button** | **normal**   |
+| **StatusEffect status="burned"**         | **span**   | **burned**   |
+| **StatusEffect as="div" status="poisoned"** | **div**    | **poisoned** |
+
+## Exercise
+
+### Scenario
+
+The Pokemon battle system team is using a StatusEffect component and it works fairly well from an implementation point of view but there is often friction between the design teams and developers around design consistency vs accessibility.
+
+The previous developer built a status effect component using the right intentions however, the flexibility of the component is a little rigid.
+
+### What we are going to do?
+
+In today's exercise, we're going to refactor this component to use the Polymorphic pattern.
+
+It should:
+
+1. Render a semantic HTML tag based on the **as** prop BUT we have typescript in place to only allow for span, div, button, and li tags.
+2. Apply a CSS class based on a **status** prop (defaulting to 'normal' if **status** is not provided).
+3. Fall back to defaults (span, normal) if neither is provided.
+
+## Feedback
+
+Feedback is a gift and it helps me make these courses better for you. If you have 5 minutes, I'd love for you to fill out the feedback form:
+
+[Feedback](https://github.com/code-mattclaffey/react-design-patterns/issues/new)

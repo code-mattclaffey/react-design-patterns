@@ -1,8 +1,10 @@
+/* Main content styling to match landing page */
 .sbdocs-content p,
 .sbdocs-content li,
 .sbdocs-content a {
   font-size: 1.125rem;
   line-height: 1.6;
+  font-weight: 500;
 }
 
 .sbdocs-content h1,
@@ -14,16 +16,67 @@
   font-weight: 700;
   font-style: normal;
   margin-top: 1.5rem !important;
+  line-height: 1.2;
 }
 
 .sbdocs-content h1 {
   font-size: 2.5rem;
+  color: #1e293b;
 }
 
 .sbdocs-content h2 {
   font-size: 2rem;
+  color: #1e293b;
 }
 
 .sbdocs-content h3 {
   font-size: 1.75rem;
+  color: #1e293b;
+}
+
+.sbdocs-content ol {
+  list-style: decimal;
+}
+
+/* Code blocks styling */
+.sbdocs-content pre {
+  background-color: #172554 !important; /* blue-950 */
+  border: 1px solid #1e40af; /* blue-800 */
+  border-radius: 8px;
+}
+
+/* Links styling to match main page */
+.sbdocs-content a {
+  color: #3b82f6; /* blue-500 */
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.sbdocs-content a:hover {
+  color: #2563eb; /* blue-600 */
+  text-decoration: underline;
+}
+
+/* Badge/tag styling */
+.sbdocs-content .docblock-code-toggle {
+  background-color: #1e40af; /* blue-800 */
+  color: white;
+  border-radius: 6px;
+}
+
+/* Table styling */
+.sbdocs-content table {
+  border-collapse: collapse;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.sbdocs-content th {
+  background-color: #1e40af; /* blue-800 */
+  color: white;
+  font-weight: 600;
+}
+
+.sbdocs-content td {
+  border-color: #cbd5e1; /* slate-300 */
 }

@@ -1,0 +1,113 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Lessons/🥇 Gold/🛡️ Error Boundaries Pattern/01-Lesson" />
+
+# 🛡️ Error Boundaries Pattern
+
+React makes it easy to build interactive UIs, but what happens when something goes wrong during rendering? Without safeguards, an error in one part of the UI can crash the entire application.
+
+That’s where **error boundaries** come in.
+
+## What are Error Boundaries?
+
+Error boundaries are React components that catch JavaScript errors anywhere in their child component tree, log those errors, and display a fallback UI instead of the component tree that crashed.
+
+They catch errors during:
+
+- Rendering
+- Lifecycle methods
+- Constructors of the whole tree below them
+
+They **do not** catch:
+
+- Event handlers (you must use try/catch in those)
+- Asynchronous code (like **setTimeout**)
+- Server-side rendering errors
+
+## Example Use Case
+
+Imagine you’re displaying a user profile, and something breaks inside that component. Without an error boundary, your entire page might go blank. With an error boundary, you can show a friendly error message and allow the rest of the app to keep functioning.
+
+## Implementation
+
+Here’s a simple error boundary component in React:
+
+```tsx
+import React from 'react';
+
+type Props = {
+  fallback: React.ReactNode;
+  children: React.ReactNode;
+};
+
+type State = {
+  hasError: boolean;
+};
+
+export class ErrorBoundary extends React.Component<Props, State> {
+  state: State = { hasError: false };
+
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error: unknown, info: unknown) {
+    console.error('Error caught by boundary:', error, info);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return this.props.fallback;
+    }
+
+    return this.props.children;
+  }
+}
+```
+
+And using it:
+
+```JSX
+<ErrorBoundary fallback={<p>Something went wrong.</p>}>
+  <UserProfile />
+</ErrorBoundary>
+```
+
+> Alternatively you can use [React Error Boundary](https://www.npmjs.com/package/react-error-boundary) which takes care of all the scenarios needed for your error boundary in both React DOM & React Native.
+
+## Why use this pattern?
+
+Error boundaries:
+
+- Improve user experience by preventing total app crashes
+- Provide a controlled fallback UI
+- Help developers catch and log production errors
+- Allow isolating risky components
+
+Here’s a quick visual guide:
+
+- Without Error Boundary With Error Boundary
+- App crashes completely App renders fallback component
+- Debugging is harder Error is logged and isolated
+
+## Exercise
+
+### Scenario
+
+You work in a company that's building a new feature where it displays all fire type Pokemon from the pokedex. A bug was introduced in the staging environment which crashed the application. This raised questions into how we should handle these situations better and log them while providing a better user experience to the customer. We are tasked to build a generic ErrorBoundary which will capture app crashes in our application.
+
+### What are we going to do?
+
+In today’s exercise, we’re going to build a reusable ErrorBoundary component to isolate failures.
+
+It should:
+
+- Catch rendering errors in any child component.
+- Display a custom fallback UI when an error occurs.
+- Log the error using console.error() where we can see it in dev tools.
+
+## Feedback
+
+Your feedback helps improve this course. If you have suggestions or spot anything confusing, please take a moment to leave feedback:
+
+[Feedback](https://github.com/code-mattclaffey/react-design-patterns/issues/new)

@@ -1,0 +1,76 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Lessons/🥉 Bronze/🧩 Props Combination Pattern/01-Lesson" />
+
+# 🧩 Props Combination Pattern
+
+Props are used to pass data from one component to another. The prop combination pattern groups related props into a single object. This object is then passed as a single prop to a component.
+
+Some benefits of this pattern include reduction of boilerplate code, improving code readability and maintainability.
+
+Let's take a look at an example with a Pokemon trading card:
+
+```jsx
+const PokemonCard = ({
+  pokemonName,
+  pokemonType,
+  pokemonHp,
+  pokemonLevel,
+  attackName,
+  attackDamage,
+  attackDescription,
+  imageAltText,
+  imageUrlSmall,
+  imageUrlMedium,
+  imageUrlLarge,
+  cardClassName,
+  nameClassName,
+  typeClassName,
+  statsClassName,
+  attackClassName
+}) => <article>{/* Lots of Pokemon card code here... */}</article>;
+```
+
+Yes... this is pretty wild but it's very common to see this in the real world. What we have going into this Pokemon card component is:
+
+- pokemon - name, type, hp, level
+- attack - name, damage, description  
+- image - the image sources and alt text
+- styling - all className props
+
+Now look at this when it is grouped:
+
+```jsx
+const PokemonCard = ({ pokemon, attack, image, styling }) => (
+  <article>{/* Lots of Pokemon card code here... */}</article>
+);
+```
+
+It is now a lot simpler to understand, we know the component needs pokemon data, an attack, an image, and styling options. If we then wanted to, we could easily add more pokemon stats or attacks.
+
+## Exercise
+
+In this exercise we are going to do the same thing that we did to the Pokemon card snippet above and then we have some extras to add to it so it will get you thinking about how to change the props if necessary.
+
+You'll be refactoring a Pokemon trading card component that currently has too many individual props into a cleaner, grouped structure.
+
+Head over to the exercise file and let's begin.
+
+## When to use this pattern?
+
+**Use props combination for:**
+- **Related Data**: Group logically related props together
+- **Reducing Clutter**: When components have many individual props
+- **API Design**: Creating cleaner component interfaces
+- **Maintainability**: Easier to add/remove related properties
+
+**Avoid when:**
+- **Simple Components**: Few props don't need grouping
+- **Unrelated Props**: Don't force unrelated props together
+- **Performance**: Grouping can cause unnecessary re-renders
+
+## Feedback
+
+Feedback is a gift and it helps me make this course better for you. If you have a spare 5 mins please could you fill out a feedback form for me. Thank you.
+
+[Feedback](https://github.com/code-mattclaffey/react-design-patterns/issues/new)

@@ -1,0 +1,61 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Lessons/🥈 Silver/🌌 Portals Pattern/01-Lesson" />
+
+# 🌌 Portals Pattern
+
+A React portal lets you render some children into a different part of the DOM. When you call the **createPortal** it will trigger the creation of the portal. When you unmount, the portal removes itself. This is perfect for Pokemon battle overlays that need to appear above everything else in the game.
+
+```jsx
+import { createPortal } from 'react-dom';
+
+// ...
+
+<div>
+  <p>This is the main game interface.</p>
+  {createPortal(
+    <div className="battle-overlay">
+      <p>A wild Pokemon appeared!</p>
+    </div>,
+    document.body
+  )}
+</div>;
+```
+
+Which in html, will translate to:
+
+```html
+<html>
+  <head>
+    <title>Pokemon Game</title>
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        <p>This is the main game interface.</p>
+      </div>
+    </div>
+
+    <div class="battle-overlay">
+      <p>A wild Pokemon appeared!</p>
+    </div>
+  </body>
+</html>
+```
+
+Portal benefits:
+
+- Battle overlays render above all game content
+- No clashes with z-index as the battle screen is at the root of the DOM
+- Simplified state management for battle transitions
+- Perfect for full-screen battle interfaces
+
+## Exercise
+
+In the current Pokemon game when a trainer encounters a wild Pokemon and the battle overlay appears, the trainer cannot interact with the battle interface properly due to z-index issues with the main game content.
+
+## Feedback
+
+Feedback is a gift and it helps me make this course better for you. If you have a spare 5 mins please could you fill out a feedback form for me. Thank you.
+
+[Feedback](https://github.com/code-mattclaffey/react-design-patterns/issues/new)

@@ -1,0 +1,48 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Lessons/🥈 Silver/🎨 Render Props Pattern/01-Lesson" />
+
+# 🎨 Render Props Pattern
+
+Render props is a pattern where you pass a function as a prop (typically called **render**) that returns a React element. The component calls this function with data, allowing complete control over rendering.
+
+## Basic Example
+
+```jsx
+const PokemonStats = ({ render }) => {
+  const stats = { hp: 340, attack: 284 };
+  return render(stats);
+};
+
+// Usage
+<PokemonStats
+  render={({ hp, attack }) => (
+    <div>
+      HP: {hp}, Attack: {attack}
+    </div>
+  )}
+/>;
+```
+
+## Exercise
+
+In this exercise we have a Pokemon type effectiveness calculator that's tightly coupled with a specific display format. Different teams want to use the calculation logic but with their own display components.
+
+Your task is to refactor the component to use the render props pattern with a **render** prop, separating the calculation logic from the display.
+
+Head over to the exercise file and let's begin.
+
+## Why use this pattern?
+
+Render props is valuable for:
+
+- **Explicit API**: Clear, named render prop instead of overloaded children
+- **Reusable Logic**: Share complex calculations across different UI implementations
+- **Library Design**: Common pattern in popular libraries like React Router and Formik
+- **Flexible Rendering**: Complete control over how data is displayed
+
+## Feedback
+
+Feedback is a gift and it helps me make this course better for you. If you have a spare 5 mins please could you fill out a feedback form for me. Thank you.
+
+[Feedback](https://github.com/code-mattclaffey/react-design-patterns/issues/new)
