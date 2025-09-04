@@ -1,69 +1,72 @@
-import { useEffect } from 'react';
-import { IPokemonManagerActions, withPokemons } from './withPokemon';
-import {
-  IPokemon,
-  IPokemonManagerState
-} from '@shared/modules/PokemonManager/PokemonManager';
+import { ComponentType } from 'react';
 
-interface IMapStateToPropsComponentOneResponse {
-  pokemons: IPokemon[];
+interface IPokemon {
+  id: number;
+  name: string;
+  type: string;
+  level: number;
 }
 
-interface IActionsComponentOneResponse {
-  fetchPokemons: (total: number) => Promise<void>;
-}
+// Sample Pokemon data
+const samplePokemon: IPokemon[] = [
+  { id: 1, name: 'Pikachu', type: 'Electric', level: 25 },
+  { id: 4, name: 'Charmander', type: 'Fire', level: 12 },
+  { id: 7, name: 'Squirtle', type: 'Water', level: 18 }
+];
 
-interface IComponentOneProps
-  extends IMapStateToPropsComponentOneResponse,
-    IActionsComponentOneResponse {
-  title: string;
-}
+// HOC: Add Pokemon type-based styling
+const withPokemonType = <P extends object>(
+  Component: ComponentType<P>
+) => {
+  return (props: P & { type?: string }) => {
+    const getTypeStyles = (type?: string) => {
+      const styles = {
+        Electric: 'bg-yellow-100 border-yellow-300',
+        Fire: 'bg-red-100 border-red-300',
+        Water: 'bg-blue-100 border-blue-300'
+      };
+      return (
+        styles[type as keyof typeof styles] ||
+        'bg-gray-100 border-gray-300'
+      );
+    };
 
-const mapStateToProps = (
-  state: IPokemonManagerState
-): IMapStateToPropsComponentOneResponse => ({
-  pokemons: state.pokemons
-});
-
-const mapActionsToProps = (
-  actions: IPokemonManagerActions
-): IActionsComponentOneResponse => ({
-  fetchPokemons: actions.fetchPokemons
-});
-
-const Component = ({
-  pokemons,
-  title,
-  fetchPokemons
-}: IComponentOneProps) => {
-  useEffect(() => {
-    fetchPokemons(12);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  return (
-    <section>
-      <h2 className="text-2xl font-bold mb-4">{title}</h2>
-      <div className="grid grid-cols-6 gap-6">
-        {pokemons.map((pokemon) => (
-          <div key={pokemon.id}>
-            <img
-              src={pokemon.imageUrl}
-              alt={pokemon.name}
-              loading="lazy"
-            />
-          </div>
-        ))}
+    return (
+      <div
+        className={`p-4 border-2 rounded-lg ${getTypeStyles(props.type)}`}
+      >
+        <Component {...props} />
       </div>
-    </section>
-  );
+    );
+  };
 };
 
-export const Final = withPokemons<
-  IMapStateToPropsComponentOneResponse,
-  IActionsComponentOneResponse,
-  { title: string }
->(
-  mapStateToProps,
-  mapActionsToProps
-)(Component);
+// Basic Pokemon Card Component
+const PokemonCard = ({ pokemon }: { pokemon: IPokemon }) => (
+  <div className="p-4 bg-white rounded-lg border">
+    <h3 className="text-xl font-bold">{pokemon.name}</h3>
+    <p className="text-gray-600">Type: {pokemon.type}</p>
+    <p className="text-gray-600">Level: {pokemon.level}</p>
+  </div>
+);
+
+// Enhanced component using HOC
+const StyledPokemonCard = withPokemonType(PokemonCard);
+
+export const Final = () => {
+  return (
+    <div className="space-y-8 max-w-2xl">
+      <h1 className="text-3xl font-bold">Pokemon Cards with HOC</h1>
+
+      <div className="space-y-6">
+        {samplePokemon.map((pokemon) => (
+          <StyledPokemonCard
+            key={pokemon.id}
+            pokemon={pokemon}
+            type={pokemon.type}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};

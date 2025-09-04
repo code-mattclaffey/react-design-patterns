@@ -88,6 +88,19 @@ const PokemonExplorer = () => {
 
 In the first exercise we are going to look into building a Pokemon trainer status system that shows different content based on whether the trainer has earned gym badges. Go to the exercise.tsx inside the ConditionalRendering folder and start the exercise. Once completed, the Tests will show as passed in the storybook "Interactions" addon section.
 
+## When to use this pattern?
+
+**Use conditional rendering for:**
+- **Dynamic UI**: Show/hide components based on state or props
+- **User Permissions**: Display content based on user roles
+- **Loading States**: Show spinners while data loads
+- **Error Handling**: Display error messages when needed
+
+**Avoid when:**
+- **Complex Logic**: Use separate components for complex conditions
+- **Performance**: Avoid heavy computations in render conditions
+- **Readability**: Don't nest too many ternary operators
+
 ## Feedback
 
 Feedback is a gift and it helps me make this course better for you. If you have a spare 5 mins please could you fill out a feedback form for me. Thank you.

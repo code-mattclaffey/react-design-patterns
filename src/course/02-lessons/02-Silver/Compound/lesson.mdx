@@ -27,6 +27,19 @@ The compound component pattern is useful in building complex React components su
 
 A requirement has come in to reuse the Pokemon team builder in another location of our application. The current implementation of the team builder has its state management implemented only on the page that this component is used on. We need to refactor the component to use the compound design pattern so that it can be re-used on both pages. Head over to the exercise.tsx to continue.
 
+## When to use this pattern?
+
+**Use compound components for:**
+- **Complex UI**: Multi-part components like accordions, tabs, modals
+- **Flexible API**: When you want declarative, composable interfaces
+- **State Sharing**: Components that need to share state implicitly
+- **Reusable Libraries**: Building component libraries with flexible APIs
+
+**Avoid when:**
+- **Simple Components**: Basic components don't need compound patterns
+- **Performance**: Can add complexity if not needed
+- **Learning Curve**: May be confusing for junior developers
+
 ## Feedback
 
 Feedback is a gift and it helps me make this course better for you. If you have a spare 5 mins please could you fill out a feedback form for me. Thank you.

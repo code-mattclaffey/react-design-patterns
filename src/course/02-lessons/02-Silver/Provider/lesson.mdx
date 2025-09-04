@@ -34,6 +34,21 @@ const Page = () => {
 
 In this lesson we are going to implement the PokemonManager with the react content pattern and pull that information from a hook in our component. Head over to the exercise.tsx file to get started.
 
+## When to use this pattern?
+
+**Use Provider pattern for:**
+
+- **Global State**: App-wide data like user authentication, themes
+- **Avoiding Prop Drilling**: When props pass through many components
+- **Shared Logic**: Common functionality across component trees
+- **Configuration**: App settings that many components need
+
+**Avoid when:**
+
+- **Local State**: Component-specific state should stay local
+- **Simple Apps**: Small apps don't need global state management
+- **Performance**: Context changes re-render all consumers
+
 ## Feedback
 
 Feedback is a gift and it helps me make this course better for you. If you have a spare 5 mins please could you fill out a feedback form for me. Thank you.

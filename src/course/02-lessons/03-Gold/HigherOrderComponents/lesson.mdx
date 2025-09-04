@@ -2,55 +2,63 @@ import { Meta } from '@storybook/blocks';
 
 <Meta title="Lessons/🥇 Gold/🎆 Higher Order Components Pattern/01-Lesson" />
 
-# 🎆 Higher Order Components Pattern
+# 🎆 Higher Order Components (HOC)
 
-In some cases you may want to have some logic that is consistent across your application. You could use hooks but this requires implementing some logic of code within each component you apply the hook which isn't sustainable as a higher order component.
+Higher Order Components are functions that take a component and return a new component with additional functionality. They're perfect for cross-cutting concerns like authentication, logging, or data fetching that you want to apply to multiple components.
 
-## What does it look like syntactically
-
-If you are familiar with functional programming this looks very similar to the "currying" pattern.
+## Basic Example
 
 ```jsx
-// HigherOrderComponent.ts
-export const withHigherOrderComponent = (Component) => (props) => {
-  const { isAuth } = useAuthentication();
+// HOC that adds Pokemon type styling
+const withPokemonType = (Component) => (props) => {
+  const getTypeColor = (type) => {
+    const colors = {
+      Fire: 'bg-red-100 border-red-300',
+      Water: 'bg-blue-100 border-blue-300',
+      Electric: 'bg-yellow-100 border-yellow-300'
+    };
+    return colors[type] || 'bg-gray-100 border-gray-300';
+  };
 
-  if (!isAuth) {
-    return <p>Not authenticated</p>;
-  }
-
-  return <Component {...props} />;
+  return (
+    <div
+      className={`p-4 border-2 rounded-lg ${getTypeColor(props.type)}`}
+    >
+      <Component {...props} />
+    </div>
+  );
 };
 
-// Component.tsx
-import { withHigherOrderComponent } from 'HigherOrderComponent.ts';
+// Usage
+const PokemonCard = ({ name, type }) => <h3>{name}</h3>;
+const StyledPokemonCard = withPokemonType(PokemonCard);
 
-const Component = ({ foo }) => <p>{foo}</p>;
-
-export default withHigherOrderComponent(Component);
-
-// App.tsx
-
-import Component from 'Component.tsx';
-
-const App = () => {
-  return <Component foo="bar" />;
-};
+// Renders with type-specific styling
+<StyledPokemonCard name="Pikachu" type="Electric" />;
 ```
-
-> In React it is good practice to use the **with** at the start as the name associates to a higher order component.
-
-Now let's breakdown what is actually going on here. You have the **withHigherOrderComponent** and it takes a Component as a prop and then you return another function with props which will normally be the props that the component will need that do not get provided by the higher order component.
-
-## When would this be useful?
-
-The logic in the higher order component is consolidated into one area which makes things more consistent across your application vs writing that line over and over again in every use case you need.
 
 ## Exercise
 
-In this exercise we are going to go a bit wild and implement a very high level version of the Redux connect. The higher order component will pull information from a class which stores our data and then we will relay that data into the component.
+In this exercise we have Pokemon components that need common functionality like loading states, error handling, and type-based styling. Instead of duplicating this logic, we'll create HOCs to wrap components with these features.
 
-> Blast from the past this if you have done this with old Redux... sorry 😉
+Your task is to create HOCs that add loading states, error boundaries, and Pokemon type styling to any component.
+
+Head over to the exercise file and let's begin.
+
+## When to use this pattern?
+
+**Use HOCs for:**
+
+- **Cross-cutting Concerns**: Authentication, logging, analytics
+- **Code Reuse**: Same functionality across multiple components
+- **Legacy Support**: Wrapping class components with modern features
+- **Third-party Integration**: Adding external library features
+
+**Avoid when:**
+
+- **Simple Logic**: Use hooks for simpler state management
+- **Modern React**: Prefer hooks and composition over HOCs
+- **Complex Props**: HOCs can make prop flow confusing
 
 ## Feedback
 
