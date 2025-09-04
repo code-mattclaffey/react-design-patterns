@@ -16,22 +16,22 @@ type Story = StoryObj<typeof Exercise>;
  */
 export const Default: Story = {
   args: {
-    title: 'The Coldest Sunset Festival',
-    subText:
-      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.',
-    ctaText: '#festival',
-    ctaUrl: '/',
-    imageAltText: 'DJ playing at a festival',
-    imageUrlMobile:
-      'https://images.unsplash.com/photo-1493676304819-0d7a8d026dcf?w=767&h=640&fit=crop',
-    imageUrlTablet:
-      'https://images.unsplash.com/photo-1493676304819-0d7a8d026dcf?w=1024&h=640&fit=crop',
-    imageUrlDesktop:
-      'https://images.unsplash.com/photo-1493676304819-0d7a8d026dcf?w=1600&h=900&fit=crop',
-    containerClassName: 'containerClassName',
-    titleClassName: 'titleClassName',
-    subTextClassName: 'subTextClassName',
-    ctaClassName: 'ctaClassName',
-    imageClassName: 'imageClassName'
+    pokemonName: 'Charizard',
+    pokemonType: 'Fire/Flying',
+    pokemonHp: 180,
+    pokemonLevel: 55,
+    attackName: 'Fire Blast',
+    attackDamage: 120,
+    attackDescription: 'A powerful fire attack that may leave the target with a burn.',
+    imageAltText: 'Charizard breathing fire',
+    imageUrlSmall: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png',
+    imageUrlMedium: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png',
+    imageUrlLarge: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png',
+    cardClassName: 'shadow-xl',
+    nameClassName: 'text-red-600',
+    typeClassName: 'bg-red-500',
+    hpClassName: 'text-red-700',
+    attackClassName: 'border-red-400',
+    imageClassName: 'hover:scale-105 transition-transform'
   }
 };
