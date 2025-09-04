@@ -168,6 +168,8 @@ export const Exercise = () => {
       'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png'
   };
 
+  // 💣 You can get rid of this eslint error comment when finished.
+  // @ts-ignore
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const evolution = {
     name: 'Charmeleon',
