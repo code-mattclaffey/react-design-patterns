@@ -1,0 +1,48 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Lessons/🥈 Silver/🎯 FACC Pattern/01-Lesson" />
+
+# 🎯 FACC (Function as Child Component) Pattern
+
+FACC is a pattern where you pass a function as the children prop. The component calls this function with data, allowing complete control over rendering while sharing logic.
+
+## Basic Example
+
+```jsx
+const PokemonData = ({ children }) => {
+  const pokemon = { name: 'Pikachu', type: 'Electric' };
+  return children(pokemon);
+};
+
+// Usage
+<PokemonData>
+  {(pokemon) => (
+    <h1>
+      {pokemon.name} is {pokemon.type} type!
+    </h1>
+  )}
+</PokemonData>;
+```
+
+## Exercise
+
+In this exercise we have a Pokemon battle simulator that's tightly coupled with a specific battle display. Different teams want to use the battle logic but with their own custom battle interfaces.
+
+Your task is to refactor the battle simulator to use FACC pattern, separating the battle logic from the display components.
+
+Head over to the exercise file and let's begin.
+
+## Why use this pattern?
+
+FACC is valuable for:
+
+- **Clean API**: Uses the natural children prop instead of custom render props
+- **Flexible Rendering**: Complete control over how data is displayed
+- **Logic Reuse**: Share complex state management across different UIs
+- **Component Libraries**: Create headless components that work with any design system
+
+## Feedback
+
+Feedback is a gift and it helps me make this course better for you. If you have a spare 5 mins please could you fill out a feedback form for me. Thank you.
+
+[Feedback](https://github.com/code-mattclaffey/react-design-patterns/issues/new)

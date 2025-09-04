@@ -95,7 +95,7 @@ const EvolutionModal = ({
         {/* ♿️ Another requirement is to return focus to the actioner, but FocusLock does that for us when this component unmounts! 🦸🏻♀️ */}
         <FocusLock returnFocus={true}>
           <div>
-            {/* 2f - 👨🏻💻♿️ Add id={`evolution_title_${id}`} - this creates the relationship between the title and modal */}
+            {/* 2f - 💻 ♿️ Add id={`evolution_title_${id}`} - this creates the relationship between the title and modal */}
             <h2 className="text-2xl font-bold text-center mb-4 text-blue-800">
               ✨ Evolution Time! ✨
             </h2>
@@ -141,7 +141,7 @@ const EvolutionModal = ({
               </Button>
             </div>
           </div>
-          {/* 2i - 👨🏻💻♿️ Add id={`evolution_body_${id}`} - this creates the relationship between the content and modal */}
+          {/* 2i - 💻 ♿️ Add id={`evolution_body_${id}`} - this creates the relationship between the content and modal */}
           <div className="mt-4 text-center text-sm text-gray-600">
             Your {pokemon.name} is ready to evolve into{' '}
             {evolution.name}!
