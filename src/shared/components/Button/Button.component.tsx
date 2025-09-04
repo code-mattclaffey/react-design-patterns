@@ -4,6 +4,7 @@ import { HTMLAttributes } from 'react';
 interface IButton extends HTMLAttributes<HTMLButtonElement> {
   className?: string;
   children: React.ReactNode | React.ReactNode[];
+  disabled?: boolean;
 }
 
 const buttonClasses =

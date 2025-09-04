@@ -1,111 +1,188 @@
-import { ChangeEvent, useState } from 'react';
-import { TextFieldProps, TextFieldComponent } from '../components';
+import { useState } from 'react';
+import { Button } from '@shared/components/Button/Button.component';
 
 /*
  * Observations
  * 💅 The current implementation uses the Render Props Pattern
- * Don't worry about the UI in the components file.
+ * We need to refactor this into a custom hook for Pokemon capture mechanics
  */
 
-interface IFieldProps {
-  name: string;
-  validate?: (value: string) => boolean;
-  required?: boolean;
-
-  // 1B 💣 - remove these four params and references in the function.
-  id: string;
-  label: string;
-  errorMessage?: string;
-  children: (props: TextFieldProps) => React.ReactNode;
+interface IPokemonCaptureProps {
+  area: string;
+  children: (captureState: {
+    wildPokemon: Pokemon | null;
+    pokeballs: number;
+    capturing: boolean;
+    capturedPokemon: Pokemon[];
+    attemptCapture: () => void;
+    encounterPokemon: () => void;
+    runAway: () => void;
+    restockPokeballs: (amount?: number) => void;
+  }) => React.ReactNode;
 }
 
-const validateTextString = (value: string) =>
-  value.trim().length === 0;
+interface Pokemon {
+  id: number;
+  name: string;
+  type: string;
+  captureRate: number;
+}
 
-// 1A 👨🏻‍💻 - We need to refactor this to be called useField
-export const Field = ({
-  name,
-  required,
-  validate,
-  // 1B 💣 - remove these four params and references in the function.
-  label,
-  id,
-  errorMessage,
+const WILD_POKEMON = [
+  { id: 1, name: 'Pidgey', type: 'Flying', captureRate: 0.8 },
+  { id: 2, name: 'Rattata', type: 'Normal', captureRate: 0.9 },
+  { id: 3, name: 'Pikachu', type: 'Electric', captureRate: 0.3 }
+];
+
+// 1A 👨🏻💻 - We need to refactor this to be called usePokemonCapture
+export const PokemonCaptureSystem = ({
   children
-}: IFieldProps) => {
-  const [value, setValue] = useState('');
-  const [hasError, setHasError] = useState(false);
-  const [isTouched, setIsTouched] = useState(false);
+}: IPokemonCaptureProps) => {
+  const [wildPokemon, setWildPokemon] = useState<Pokemon | null>(
+    null
+  );
+  const [pokeballs, setPokeballs] = useState(10);
+  const [capturing, setCapturing] = useState(false);
+  const [capturedPokemon, setCapturedPokemon] = useState<Pokemon[]>(
+    []
+  );
 
-  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-    if (required && validate) {
-      setHasError(validate(event.target.value));
-    }
-
-    setValue(event.target.value!);
+  const encounterPokemon = () => {
+    const randomPokemon =
+      WILD_POKEMON[Math.floor(Math.random() * WILD_POKEMON.length)];
+    setWildPokemon(randomPokemon);
   };
 
-  const onFocus = () => {
-    if (isTouched) {
-      setHasError(false);
+  const attemptCapture = async () => {
+    if (!wildPokemon || pokeballs <= 0) return;
+
+    setCapturing(true);
+    setPokeballs((prev) => prev - 1);
+
+    // Simulate capture attempt
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+
+    const success = Math.random() < wildPokemon.captureRate;
+    if (success) {
+      setCapturedPokemon((prev) => [...prev, wildPokemon]);
+      setWildPokemon(null);
     }
 
-    setIsTouched(true);
+    setCapturing(false);
   };
 
-  const onBlur = () => {
-    if (value && validate && validate(value)) {
-      setHasError(true);
-    }
+  const runAway = () => {
+    setWildPokemon(null);
   };
 
-  // 1C 👨🏻‍💻 - Just return the object instead of children.
+  const restockPokeballs = (amount: number = 5) => {
+    setPokeballs(prev => prev + amount);
+  };
+
+  // 1C 👨🏻💻 - Just return the object instead of children
   return children({
-    // 1D 👨🏻‍💻 - move name into input
-    name,
-    input: {
-      required,
-      onBlur,
-      onFocus,
-      onChange
-    },
-    hasError,
-    // 1B 💣 - remove these three params and references in the function.
-    label,
-    id,
-    errorMessage
+    wildPokemon,
+    pokeballs,
+    capturing,
+    capturedPokemon,
+    attemptCapture,
+    encounterPokemon,
+    runAway,
+    restockPokeballs
   });
 };
 
-// 2A 🤔 - What if we wanted to make multiple Fields? Our current solution would
-// require us to call useField multiple times in the same component. Let's refactor
-// what we have done into a field component which uses IFieldProps as params.
+// 2A 🤔 - What if we wanted to use this capture logic in multiple components?
+// Let's make a component which uses the usePokemonCapture hook and takes an area prop
 
 export const Exercise = () => {
-  // 1E 👨🏻‍💻 - call the useField and pass the { name: "input", validate: validateTextString, required: true }
+  // 1E 👨🏻💻 - call the usePokemonCapture hook here
   return (
-    <form noValidate name="form">
-      {/* 1F 💣 - Remove the Field component and pull the values required for TextFieldComponent to run */}
-      <Field
-        name="input"
-        id="input"
-        label="Enter your name"
-        required
-        errorMessage="Please enter your name"
-        validate={validateTextString}
-      >
-        {({ name, label, id, errorMessage, hasError, input }) => (
-          <TextFieldComponent
-            // This will be input.name now.
-            name={name}
-            label={label}
-            id={id}
-            errorMessage={errorMessage}
-            hasError={hasError}
-            input={input}
-          />
+    <div className="p-6 bg-green-50 rounded-lg">
+      <h2 className="text-2xl font-bold mb-4">
+        🌿 Pokemon Capture System
+      </h2>
+
+      {/* 1F 💣 - Remove the PokemonCaptureSystem component and use the hook directly */}
+      <PokemonCaptureSystem area="tall-grass">
+        {({
+          wildPokemon,
+          pokeballs,
+          capturing,
+          capturedPokemon,
+          attemptCapture,
+          encounterPokemon,
+          runAway,
+          restockPokeballs
+        }) => (
+          <div>
+            <div className="mb-4 flex justify-between items-center">
+              <div>
+                <p className="text-lg">Pokeballs: {pokeballs} 🔴</p>
+                <p className="text-sm text-gray-600">
+                  Captured: {capturedPokemon.length} Pokemon
+                </p>
+              </div>
+              <Button onClick={() => restockPokeballs()} disabled={pokeballs >= 20}>
+                🛍️ Buy Pokeballs (+5)
+              </Button>
+            </div>
+
+            {!wildPokemon ? (
+              <div className="text-center">
+                <p className="mb-4">No wild Pokemon in sight...</p>
+                <Button onClick={encounterPokemon}>
+                  🔍 Search for Pokemon
+                </Button>
+              </div>
+            ) : (
+              <div className="bg-white p-4 rounded-lg border-2 border-dashed border-green-300">
+                <h3 className="text-xl font-bold text-green-700">
+                  A wild {wildPokemon.name} appeared! ⚡
+                </h3>
+                <p className="text-gray-600 mb-4">
+                  Type: {wildPokemon.type} | Capture Rate:{' '}
+                  {(wildPokemon.captureRate * 100).toFixed(0)}%
+                </p>
+
+                {capturing ? (
+                  <div className="text-center">
+                    <p className="text-lg animate-pulse">
+                      🔴 Pokeball is shaking...
+                    </p>
+                  </div>
+                ) : (
+                  <div className="flex gap-2">
+                    <Button
+                      onClick={attemptCapture}
+                      disabled={pokeballs <= 0}
+                    >
+                      🔴 Throw Pokeball ({pokeballs} left)
+                    </Button>
+                    <Button onClick={runAway}>🏃 Run Away</Button>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {capturedPokemon.length > 0 && (
+              <div className="mt-4">
+                <h4 className="font-bold mb-2">Captured Pokemon:</h4>
+                <div className="flex gap-2 flex-wrap">
+                  {capturedPokemon.map((pokemon, index) => (
+                    <span
+                      key={index}
+                      className="bg-blue-100 px-2 py-1 rounded text-sm"
+                    >
+                      {pokemon.name}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
         )}
-      </Field>
-    </form>
+      </PokemonCaptureSystem>
+    </div>
   );
 };

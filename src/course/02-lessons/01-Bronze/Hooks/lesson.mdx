@@ -10,49 +10,51 @@ Additionally, Hooks enhance reusability and reduce prop drilling. Custom Hooks a
 
 ## Before Hooks
 
-Before hooks we used to have to make class components which enforced a lot of prop drilling into components and a lot more complicated setup for state management. The Presentational & Container pattern was used a lot more back when we were using class components and that was purely for that seperation of concerns.
+Before hooks we used to have to make class components which enforced a lot of prop drilling into components and a lot more complicated setup for state management. The Presentational & Container pattern was used a lot more back when we were using class components and that was purely for that separation of concerns.
 
 ```jsx
 import React, { Component } from 'react';
 
-class Profile extends Component {
+class PokemonCapture extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loading: false,
-      user: {}
+      capturing: false,
+      wildPokemon: null,
+      pokeballs: 10,
+      capturedPokemon: []
     };
   }
 
   componentDidMount() {
-    this.updateProfile(this.props.id);
+    this.encounterWildPokemon(this.props.area);
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.id !== this.props.id) {
-      this.updateProfile(this.props.id);
+    if (prevProps.area !== this.props.area) {
+      this.encounterWildPokemon(this.props.area);
     }
   }
 
   componentWillUnmount() {
-    // do some unmounting actions
+    // cleanup capture animations
   }
 
-  fetchUser(id) {
-    // fetch users logic here
+  encounterWildPokemon(area) {
+    // find random pokemon in area
   }
 
-  async updateProfile(id) {
-    this.setState({ loading: true });
-    // fetch users data
-    await this.fetchUser(id);
-    this.setState({ loading: false });
+  async attemptCapture(pokemon) {
+    this.setState({ capturing: true });
+    // capture logic with success rate
+    await this.throwPokeball(pokemon);
+    this.setState({ capturing: false });
   }
   render() {
-    // ... some jsx
+    // ... pokemon capture jsx
   }
 }
-export default Profile;
+export default PokemonCapture;
 ```
 
 ## With Hooks
@@ -60,36 +62,40 @@ export default Profile;
 With Hooks, functional components can handle both the presentational aspects and the business logic. This means you no longer need to separate your components strictly into presentational and container types.
 
 ```jsx
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-const Profile = ({ id }) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [user, setUser] = useState({});
+const PokemonCapture = ({ area }) => {
+  const [capturing, setCapturing] = useState(false);
+  const [wildPokemon, setWildPokemon] = useState(null);
+  const [pokeballs, setPokeballs] = useState(10);
+  const [capturedPokemon, setCapturedPokemon] = useState([]);
 
   useEffect(() => {
-    updateProfile(id);
-  }, [id]);
+    encounterWildPokemon(area);
+  }, [area]);
 
-  const fetchUser = (id) => {
-    // fetch users logic here
+  const encounterWildPokemon = (area) => {
+    // find random pokemon in area
   };
 
-  const updateProfile = async (id) => {
-    setIsLoading(true);
-    // fetch users data
-    await fetchUser(id);
-    setIsLoading(false);
+  const attemptCapture = async (pokemon) => {
+    setCapturing(true);
+    // capture logic with success rate
+    await throwPokeball(pokemon);
+    setCapturing(false);
   };
 
-  return {
-    // Some jsx code
-  };
+  return (
+    // Pokemon capture interface jsx
+  );
 };
 ```
 
 ## Exercise
 
-In this lesson we are going to refactor the Field component that we made into a react hook instead of following the render props pattern.
+In this lesson we are going to refactor the Pokemon capture component into a custom React hook called **usePokemonCapture()** instead of following the render props pattern.
+
+You'll create a hook that manages capture attempts, pokeball inventory, success rates, and wild Pokemon encounters.
 
 Head over to the exercise and let's get started.
 
