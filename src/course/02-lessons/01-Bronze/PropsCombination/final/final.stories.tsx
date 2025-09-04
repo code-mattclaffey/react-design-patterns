@@ -16,27 +16,32 @@ type Story = StoryObj<typeof Final>;
  */
 export const Default: Story = {
   args: {
-    title: 'The Coldest Sunset Festival',
-    subText:
-      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.',
-    cta: {
-      text: '#festival',
-      url: '/'
+    pokemon: {
+      name: 'Pikachu',
+      type: 'Electric',
+      hp: 120,
+      level: 25
+    },
+    attack: {
+      name: 'Thunderbolt',
+      damage: 90,
+      description: 'A strong electric blast that may paralyze the target.'
     },
     image: {
-      alt: 'DJ playing at a festival',
-      images: [
-        'https://images.unsplash.com/photo-1493676304819-0d7a8d026dcf?w=767&h=640&fit=crop',
-        'https://images.unsplash.com/photo-1493676304819-0d7a8d026dcf?w=1024&h=640&fit=crop',
-        'https://images.unsplash.com/photo-1493676304819-0d7a8d026dcf?w=1600&h=900&fit=crop'
+      alt: 'Pikachu with electric sparks',
+      sources: [
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png',
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png',
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png'
       ]
     },
-    classNames: {
-      container: 'container',
-      title: 'title',
-      subText: 'subText',
-      cta: 'cta',
-      image: 'image'
+    styling: {
+      card: 'shadow-xl border-yellow-400',
+      name: 'text-yellow-600',
+      type: 'bg-yellow-500',
+      hp: 'text-yellow-700',
+      attack: 'border-yellow-400',
+      image: 'hover:scale-105 transition-transform'
     }
   }
 };

@@ -8,46 +8,51 @@ Props are used to pass data from one component to another. The prop combination 
 
 Some benefits of this pattern include reduction of boilerplate code, improving code readability and maintainability.
 
-Let's take a look at an example:
+Let's take a look at an example with a Pokemon trading card:
 
 ```jsx
-const CardComponent = ({
-  title,
-  subText,
-  ctaText,
-  ctaUrl,
+const PokemonCard = ({
+  pokemonName,
+  pokemonType,
+  pokemonHp,
+  pokemonLevel,
+  attackName,
+  attackDamage,
+  attackDescription,
   imageAltText,
-  imageUrlMobile,
-  imageUrlTablet,
-  imageUrlDesktop,
-  containerClassName,
-  titleClassName,
-  subTextClassName,
-  ctaClassName,
-  imageClassName
-}) => <article>{/* Lots of imaginary code here... */}</article>;
+  imageUrlSmall,
+  imageUrlMedium,
+  imageUrlLarge,
+  cardClassName,
+  nameClassName,
+  typeClassName,
+  statsClassName,
+  attackClassName
+}) => <article>{/* Lots of Pokemon card code here... */}</article>;
 ```
 
-Yes... this is pretty wild but it's very common to see this in the real world. What we have going into this component is:
+Yes... this is pretty wild but it's very common to see this in the real world. What we have going into this Pokemon card component is:
 
-- image - the image sources, imageAltText
-- cta - text and ctaUrl
-- content - title, sub title
-- classNames - all classNames
+- pokemon - name, type, hp, level
+- attack - name, damage, description  
+- image - the image sources and alt text
+- styling - all className props
 
 Now look at this when it is grouped:
 
 ```jsx
-const CardComponent = ({ title, subText, cta, image }) => (
-  <article>{/* Lots of imaginary code here... */}</article>
+const PokemonCard = ({ pokemon, attack, image, styling }) => (
+  <article>{/* Lots of Pokemon card code here... */}</article>
 );
 ```
 
-It is now a lot simpler to understand, we know the component has a title, it also needs a cta and an image. If we then wanted to, we would add some styles in case we need to tweak the card.
+It is now a lot simpler to understand, we know the component needs pokemon data, an attack, an image, and styling options. If we then wanted to, we could easily add more pokemon stats or attacks.
 
 ## Exercise
 
-In this exercise we are going to do the same thing that we did to the card snippet above and then we have some extras to add to it so it will get you thinking about how to change the props if necessary.
+In this exercise we are going to do the same thing that we did to the Pokemon card snippet above and then we have some extras to add to it so it will get you thinking about how to change the props if necessary.
+
+You'll be refactoring a Pokemon trading card component that currently has too many individual props into a cleaner, grouped structure.
 
 Head over to the exercise file and let's begin.
 
