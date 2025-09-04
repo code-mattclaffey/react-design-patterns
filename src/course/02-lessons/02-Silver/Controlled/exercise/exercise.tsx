@@ -43,13 +43,13 @@ const EvolutionModal = ({
   pokemon,
   evolution
 }: IEvolutionModal) => {
-  // 2a 👨🏻💻 Create a useRef<HTMLDivElement> and bind the ref to the div on line 70
+  // 2a 💻 Create a useRef<HTMLDivElement> and bind the ref to the div on line 70
 
   useEffect(() => {
     // ✍🏻 When a modal is visible you want to navigate the focus from
     // the actioner (what caused the modal to open) to the content
     // ♿️ It helps the screenreader not get lost on the page
-    // 2b - 👨🏻💻 Check if isVisible is true and the modal.current is defined before setting focus to the modal
+    // 2b - 💻 Check if isVisible is true and the modal.current is defined before setting focus to the modal
   }, [isVisible]);
 
   // 💣 You can get rid of this eslint error comment when finished.
@@ -74,7 +74,7 @@ const EvolutionModal = ({
         // 2c - 💄 Add an object as the second param with flex: isVisible and hidden !isVisible
       )}
       role="button"
-      //  2d - 👨🏻💻 Pass the onClose event from the props to the onClick event.
+      //  2d - 💻 Pass the onClose event from the props to the onClick event.
       tabIndex={0}
     >
       <div
@@ -131,11 +131,11 @@ const EvolutionModal = ({
             </div>
 
             <div className="flex gap-3 justify-center">
-              {/* 2g - 👨🏻💻 Add onClick={onConfirm} for evolution confirmation */}
+              {/* 2g - 💻 Add onClick={onConfirm} for evolution confirmation */}
               <Button className="bg-green-600 hover:bg-green-700">
                 ✨ Evolve!
               </Button>
-              {/* 2h - 👨🏻💻 Add onClick={onClose} going back to the pattern, we want outside to control the visibility of the modal */}
+              {/* 2h - 💻 Add onClick={onClose} going back to the pattern, we want outside to control the visibility of the modal */}
               <Button className="bg-gray-600 hover:bg-gray-700">
                 Cancel
               </Button>
@@ -153,13 +153,13 @@ const EvolutionModal = ({
 };
 
 export const Exercise = () => {
-  // 1a 👨🏻💻 Create a state hook variable with isEvolutionVisible and setIsEvolutionVisible
+  // 1a 💻 Create a state hook variable with isEvolutionVisible and setIsEvolutionVisible
 
-  // 1b 👨🏻💻 Create an onClose event that sets isEvolutionVisible to false
+  // 1b 💻 Create an onClose event that sets isEvolutionVisible to false
 
-  // 1c 👨🏻💻 Create an onConfirm event that handles evolution and closes modal
+  // 1c 💻 Create an onConfirm event that handles evolution and closes modal
 
-  // 1d 👨🏻💻 Create an onCheckEvolution event that sets isEvolutionVisible to true
+  // 1d 💻 Create an onCheckEvolution event that sets isEvolutionVisible to true
 
   const pokemon = {
     name: 'Charmander',
@@ -197,7 +197,7 @@ export const Exercise = () => {
         </p>
       </div>
 
-      {/* 1e 👨🏻💻 Add the onClick={onCheckEvolution} event to the button
+      {/* 1e 💻 Add the onClick={onCheckEvolution} event to the button
       ✍🏻 This is an example of a Controlled component but in a Pokemon context.
       As a developer, we are providing the button with those props for the button
       to behave how we want it to behave, otherwise, it does nothing. */}
@@ -207,7 +207,7 @@ export const Exercise = () => {
         </Button>
       </div>
 
-      {/* 1f 👨🏻💻 Check if isEvolutionVisible (💅 Conditional Render Pattern) to render the EvolutionModal */}
+      {/* 1f 💻 Check if isEvolutionVisible (💅 Conditional Render Pattern) to render the EvolutionModal */}
       {/* Map the isVisible, onClose, onConfirm props to the EvolutionModal. The other props can be whatever you want */}
     </div>
   );
