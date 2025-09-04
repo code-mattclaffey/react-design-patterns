@@ -1,0 +1,61 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Lessons/🥇 Gold/🎭 Headless Components/01-Lesson" />
+
+# 🎭 Headless Components
+
+Headless components provide logic and behavior without any UI. They separate business logic from presentation, allowing complete control over styling while reusing complex functionality across different designs.
+
+## Basic Example
+
+```jsx
+// Headless component - logic only
+const usePokemonBattle = () => {
+  const [hp, setHp] = useState(100);
+  const attack = () => setHp((prev) => Math.max(0, prev - 20));
+  const heal = () => setHp((prev) => Math.min(100, prev + 30));
+
+  return { hp, attack, heal, isDefeated: hp === 0 };
+};
+
+// UI components use the headless logic
+const BattleCard = () => {
+  const { hp, attack, heal, isDefeated } = usePokemonBattle();
+  return (
+    <div className="card">
+      <div>HP: {hp}</div>
+      <button onClick={attack}>Attack</button>
+      <button onClick={heal}>Heal</button>
+    </div>
+  );
+};
+```
+
+## Exercise
+
+In this exercise we have a Pokemon inventory system with tightly coupled UI and logic. Different teams need the same inventory functionality but with completely different designs - mobile cards, desktop tables, and admin dashboards.
+
+Your task is to extract the inventory logic into a headless component, then create multiple UI implementations that use the same underlying functionality.
+
+Head over to the exercise file and let's begin.
+
+## When to use this pattern?
+
+**Use headless components for:**
+
+- **Complex Logic**: State machines, data fetching, form validation
+- **Multiple UIs**: Same logic needed across different designs
+- **Design Systems**: Consistent behavior with flexible presentation
+- **Testing**: Easier to test logic separately from UI
+
+**Avoid when:**
+
+- **Simple Components**: Basic UI with minimal logic
+- **Single Use**: Logic only needed in one place
+- **Tight Coupling**: UI and logic are inherently connected
+
+## Feedback
+
+Feedback is a gift and it helps me make these course better for you. If you have a spare 5 mins please could you fill out a feedback form for me. Thank you.
+
+[Feedback](https://github.com/code-mattclaffey/react-design-patterns/issues/new)
