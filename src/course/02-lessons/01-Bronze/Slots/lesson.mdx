@@ -9,13 +9,13 @@ The slots pattern is very similar to the [render props pattern](?path=/docs/less
 Here is an example of how you do a render prop pattern:
 
 ```jsx
-const HelloWorld = ({ render }) => render({ hello: 'world' });
+const MapArea = ({ render }) => render({ area: 'forest', pokemonCount: 3 });
 
 // How you would use it.
-<HelloWorld render={({ hello }) => <p>{hello}</p>} />;
+<MapArea render={({ area, pokemonCount }) => <p>{area}: {pokemonCount} Pokemon</p>} />;
 ```
 
-The key thing here is that we are passing some state from our react component which can be used with components outside. What if we didn't need the the hello prop? We could still use this pattern but an alternative would be a slot.
+The key thing here is that we are passing some state from our react component which can be used with components outside. What if we didn't need the area data? We could still use this pattern but an alternative would be a slot.
 
 ## Children is a slot & a render prop
 
@@ -23,24 +23,40 @@ Now the easiest way to form a connection with the wording of "slot" is to think 
 
 ```
 {children} // slot
-{children({ hello: 'world' })} // render prop
+{children({ area: 'forest', pokemonCount: 3 })} // render prop
 ```
 
 ## Using slots as props
 
-Here is an example of us using the HelloWorld example above.
+Here is an example of us using a Pokemon map layout with slots.
 
 ```jsx
-const HelloWorld = ({ slot }) => <h1>Hello {slot}</h1>;
+const PokemonMap = ({ northSlot, southSlot, eastSlot, westSlot, centerSlot }) => (
+  <div className="map-grid">
+    <div className="north">{northSlot}</div>
+    <div className="west">{westSlot}</div>
+    <div className="center">{centerSlot}</div>
+    <div className="east">{eastSlot}</div>
+    <div className="south">{southSlot}</div>
+  </div>
+);
 
 // How you would use it.
-<HelloWorld slot={<span>World</span>} />;
+<PokemonMap 
+  northSlot={<div>🌲 Forest</div>}
+  centerSlot={<div>🏠 Pallet Town</div>}
+  southSlot={<div>🌊 Route 1</div>
+  eastSlot={<div>⚡ Power Plant</div>}
+  westSlot={<div>🏔️ Mt. Silver</div>}
+/>;
 ```
 
 The pros to using this approach are:
 
-- Useful for layout components where you make the responsibility of the layout purely column based and port the header/footer/nav using slots.
+- Useful for layout components where you make the responsibility of the layout purely slot-based and port different areas/locations using slots.
 - Removing many if statements and prop drilling from your presentational component
+- Flexible map layouts for different regions (Kanto, Johto, etc.)
+- Easy to swap out different locations without changing the map structure
 
 The cons of using this approach:
 
@@ -48,7 +64,7 @@ The cons of using this approach:
 
 ## Exercise
 
-So in the exercise we have a task to extend the functionality of our Button component. The design team want to be able to put an icon on the left side of the button and/or on the right side. Our task is to implement this feature in a way so that any icon can be put inside this component.
+So in the exercise we have a task to create a Pokemon world map layout component. The Pokemon world needs to display different locations in specific positions: towns in the center, routes connecting them, and special areas like forests and mountains. Our task is to implement this using slots so that any location can be placed in any position on the map.
 
 ## Feedback
 
