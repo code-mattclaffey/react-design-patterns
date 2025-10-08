@@ -37,9 +37,16 @@ export class PokemonManager {
         })
       );
 
-      console.log('Pokémon fetched successfully:', this.pokemons.length, 'items');
+      console.log(
+        'Pokémon fetched successfully:',
+        this.pokemons.length,
+        'items'
+      );
     } catch (error) {
-      console.error('Failed to fetch Pokemon:', error instanceof Error ? error.message : 'Unknown error');
+      console.error(
+        'Failed to fetch Pokemon:',
+        error instanceof Error ? error.message : 'Unknown error'
+      );
     }
   }
 
