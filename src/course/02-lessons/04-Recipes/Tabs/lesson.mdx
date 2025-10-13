@@ -1,0 +1,108 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Recipes/🧩 Tabs" />
+
+# Tabs
+
+In this recipe we are going to tackle what is considered to be a very complicated component to correctly build, let alone building it with the right WCAG standards + sharing it across domains. The things that need to be considered when building a Tab component:
+
+## Requirements
+
+- When focus moves into the tab list, places focus on the active tab element.
+- When the tab list contains the focus, moves focus to the next element in the page tab sequence outside the tablist, which is the tabpanel unless the first element containing meaningful content inside the tabpanel is focusable.
+- When focus is on a tab element in a horizontal tab list:
+- Left Arrow: moves focus to the previous tab. If focus is on the first tab, moves focus to the last tab. Optionally, activates the newly focused tab (See note below).
+- Right Arrow: Moves focus to the next tab. If focus is on the last tab element, moves focus to the first tab. Optionally, activates the newly focused tab (See note below).
+- When focus is on a tab in a tablist with either horizontal or vertical orientation:
+- Space or Enter: Activates the tab if it was not activated automatically on focus.
+- Home (Optional): Moves focus to the first tab. Optionally, activates the newly focused tab (See note below).
+- End (Optional): Moves focus to the last tab. Optionally, activates the newly focused tab (See note below).
+
+## WAI-ARIA Roles, States, and Properties
+
+- Tabs: The element that serves as the container for the set of tabs has role tablist.
+- Each element that serves as a tab has role tab and is contained within the element with role tablist.
+- Each element that contains the content panel for a tab has role tabpanel.
+- If the tab list has a visible label, the element with role tablist has aria-labelledby set to a value that refers to the labelling element. - - - Otherwise, the tablist element has a label provided by aria-label.
+- Each element with role tab has the property aria-controls referring to its associated tabpanel element.
+- The active tab element has the state aria-selected set to true and all other tab elements have it set to false.
+- Each element with role tabpanel has the property aria-labelledby referring to its associated tab element.
+- If a tab element has a popup menu, it has the property aria-haspopup set to either menu or true.
+- If the tablist element is vertically oriented, it has the property aria-orientation set to vertical. The default value of aria-orientation for a tablist element is horizontal.
+
+[Links to the WCAG Docs](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/)
+
+## Patterns used
+
+We are going to use three patterns to develop this component to demonstrate how you can use patterns together to make a component truly reuseable.
+
+### Compound components pattern
+
+The first pattern we are going to consider is how our users are going to apply our pattern in the Code. We want to use something like this.
+
+```tsx
+<Tabs>
+  <Tabs.List>
+    <Tabs.Button>Tab One</Tabs.Button>
+    <Tabs.Button>Tab Two</Tabs.Button>
+  </Tabs.List>
+  <Tabs.PanelContainer>
+    <Tabs.Panel>
+      Tab Panel One
+    </Tabs.Panel>
+    <Tabs.Panel>
+      Tab Panel Twp
+    </Tabs.Panel>
+  </Tabs.PanelContainer>
+</TabsList>
+
+```
+
+By doing it this way we can manage the state within the component, provide flexibility without using props and to allow certain buttons/panels have their own bespoke events such as onClick etc.
+
+### Context pattern
+
+This pattern will be applied to our Tabs component where we will manage the state between the list, button and the panels without exposing the state to the person using it.
+
+### Children cloning
+
+We are going to use the React Children api to automatically assign ids to the buttons and panels so the user does not have to manage those props.This is how cloning looks:
+
+```tsx
+const TabsPanelContainer = ({
+  children,
+  className
+}: ITabsPanelContainerProps) => {
+  const { activeTabIndex } = useTabs();
+
+  const tabPanels = Children.map(children, (child, index) => {
+    if (!isValidElement(child)) return null;
+
+    // ✅ Only allow TabsPanel components
+    if (child.type !== TabsPanel) {
+      throw new Error(
+        'TabsPanelContainer only accepts <TabsPanel /> components as children.'
+      );
+    }
+
+    return cloneElement(child, {
+      id: `tabs-panel-${index}`,
+      hidden: activeTabIndex !== index,
+      ariaLabelledBy: `tabs-button-${index}`,
+      isSelected: activeTabIndex === index
+    });
+  });
+
+  return <div className={className}>{tabPanels}</div>;
+};
+```
+
+## Design
+
+I have built the Tabs components to be style agnostic so it can be used as an abstraction which will enable more flexibility in the way the tabs component is presents but it will maintain the accessibility requirements between those components.
+
+## Feedback
+
+Your feedback helps improve this course. If you have suggestions or spot anything confusing, please take a moment to leave feedback:
+
+[Feedback](https://github.com/code-mattclaffey/react-design-patterns/issues/new)
